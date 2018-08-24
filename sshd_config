@@ -1,0 +1,17 @@
+Port 22
+
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin prohibit-password
+PermitEmptyPasswords no
+UsePAM yes
+
+X11Forwarding yes
+X11UseLocalhost no
+
+PrintMotd no
+PrintLastLog no
+
+Subsystem       sftp    /usr/lib64/misc/sftp-server
+
+AcceptEnv LANG LC_*
