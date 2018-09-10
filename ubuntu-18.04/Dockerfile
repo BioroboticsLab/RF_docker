@@ -63,7 +63,9 @@ RUN python3.6 -m pip --no-cache-dir install \
         nose-timer \
         pylint \
         requests \
-        Pillow
+        Pillow \
+        wheel \
+        twine
 
 RUN cd /opt && \
     curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/1.2.1/apache-mxnet-src-1.2.1-incubating.tar.gz && \
