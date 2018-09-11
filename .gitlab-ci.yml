@@ -1,16 +1,9 @@
 stages:
   - build
 
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-
-services:
-  - docker:dind
-
 build-ubuntu-18.04:
   stage: build
-  tags: [ linux, docker, privileged ]
-  image: docker:latest
+  tags: [ linux, shell ]
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
   script:
