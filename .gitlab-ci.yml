@@ -7,7 +7,7 @@ variables:
 services:
   - docker:dind
 
-build-x64-ubuntu-18.04:
+build-ubuntu-18.04:
   stage: build
   tags: [ linux, docker ]
   image: docker:latest
