@@ -1,0 +1,20 @@
+stages:
+  - build
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+services:
+  - docker:dind
+
+build-x64-ubuntu-18.04:
+  stage: build
+  tags: [ linux, docker ]
+  image: docker:latest
+  before_script:
+    - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+  script:
+    - docker build --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04" ubuntu-18.04
+    - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04"
+  after_script:
+    - docker logout "${CI_REGISTRY}"
