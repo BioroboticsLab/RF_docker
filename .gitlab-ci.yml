@@ -18,7 +18,7 @@ build-windows:
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
   script:
-    - docker build --isolation process --memory 12G --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:windows" windows
+    - docker build --isolation process --memory 12G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows" windows
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows"
   after_script:
     - docker logout "${CI_REGISTRY}"
