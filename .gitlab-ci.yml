@@ -11,3 +11,14 @@ build-ubuntu-18.04:
     - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04"
   after_script:
     - docker logout "${CI_REGISTRY}"
+
+build-windows:
+  stage: build
+  tags: [ windows, shell ]
+  before_script:
+    - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+  script:
+    - docker build --isolation process --memory 12G --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:windows" windows
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows"
+  after_script:
+    - docker logout "${CI_REGISTRY}"
