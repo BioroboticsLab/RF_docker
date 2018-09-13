@@ -1,5 +1,5 @@
 # Use the latest Windows Server Core image
-FROM microsoft/windowsservercore
+FROM microsoft/windowsservercore:ltsc2016
 
 SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$ErrorActionPreference = 'Stop';"]
 
