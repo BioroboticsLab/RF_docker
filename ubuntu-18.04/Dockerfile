@@ -113,7 +113,6 @@ RUN cd /tmp && \
     rm -rf pybind11-2.2.3
 
 RUN apt-get install -y \
-        file \
         libepoxy-dev \
         libglm-dev \
         libegl1-mesa-dev \
@@ -139,6 +138,10 @@ RUN apt-get install -y  openssh-server && \
 
 RUN apt-get install -y locales && \
     locale-gen en_US.UTF-8 en_GB.UTF-8
+
+RUN apt-get install -y \
+        file \
+        p7zip
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 ADD mxnet_profile.sh /etc/profile.d/mxnet.sh
