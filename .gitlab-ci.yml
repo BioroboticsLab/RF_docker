@@ -9,7 +9,7 @@ build-ubuntu-18.04:
   script:
     - GPU_DRIVER_VERSION="$(dpkg-query --showformat='${Version}' --show 'nvidia-driver-*')"
     - if [[ -f $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version ]] && [[ "$(cat $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version)" == "$GPU_DRIVER_VERSION" ]]; then OPTS=''; else OPTS='--no-cache'; fi
-    - echo "Options $OPTS"
+    - echo "A $GPU_DRIVER_VERSION, B $(cat $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version), C $OPTS"
     - echo -n $GPU_DRIVER_VERSION > $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version
     - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04" ubuntu-18.04
     - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04"
