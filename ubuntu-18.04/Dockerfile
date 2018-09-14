@@ -113,6 +113,7 @@ RUN cd /tmp && \
     rm -rf pybind11-2.2.3
 
 RUN apt-get install -y \
+        file \
         libepoxy-dev \
         libglm-dev \
         libegl1-mesa-dev \
