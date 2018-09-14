@@ -1,5 +1,4 @@
-# Use the latest Windows Server Core image
-FROM microsoft/windowsservercore:ltsc2016
+FROM microsoft/dotnet-framework:4.7.2-runtime
 
 SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$ErrorActionPreference = 'Stop';"]
 
