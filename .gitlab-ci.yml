@@ -8,7 +8,6 @@ build-ubuntu-18.04:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
   script:
     - GPU_DRIVER_VERSION="$(dpkg-query --showformat='${Version}' --show 'nvidia-driver-*')"
-    - echo $GPU_DRIVER_VERSION
     - if [[ -f $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version ]] && [[ "$(cat $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version)" == "$GPU_DRIVER_VERSION" ]]; then OPTS=''; else OPTS='--no-cache'; fi
     - echo -n $GPU_DRIVER_VERSION > $XDG_RUNTIME_DIR/rf_docker-gpu-driver-version
     - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04" ubuntu-18.04
