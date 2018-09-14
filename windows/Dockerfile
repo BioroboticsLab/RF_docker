@@ -57,4 +57,6 @@ RUN python -m pip --no-cache-dir install --no-warn-script-location \
         matplotlib \
         pandas
 
-RUN choco install -y nsis
+RUN choco install -y \
+    nsis \
+    wixtoolset
