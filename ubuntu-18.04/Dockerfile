@@ -141,7 +141,7 @@ RUN apt-get install -y locales && \
 
 RUN apt-get install -y \
         file \
-        p7zip
+        p7zip-full
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 ADD mxnet_profile.sh /etc/profile.d/mxnet.sh
