@@ -15,7 +15,12 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     (New-Object Net.WebClient).DownloadFile('https://github.com/Kitware/ninja/releases/download/v1.8.2.g972a7.kitware.dyndep-1/ninja-1.8.2.g972a7.kitware.dyndep-1_i686-pc-windows-msvc.zip', 'C:/ninja.zip'); \
     7z e C:/ninja.zip -oC:/ninja -y; \
     Remove-Item C:/ninja.zip -Force; \
-    [Environment]::SetEnvironmentVariable('PATH', "$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))" + ';C:/ninja', [EnvironmentVariableTarget]::Machine)
+    [Environment]::SetEnvironmentVariable('PATH', "$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))" + ';C:/ninja', [EnvironmentVariableTarget]::Machine); \
+    choco install -y python --version 3.6.6; \
+    $Env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
+    python -m pip --no-cache-dir install --no-warn-script-location \
+        wheel \
+        twine
 
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
@@ -26,12 +31,6 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Remove-Item C:/qt.exe -Force; \
     [Environment]::SetEnvironmentVariable('Qt5_DIR', 'C:/Qt/5.11.1/msvc2017_64', [EnvironmentVariableTarget]::Machine); \
     [Environment]::SetEnvironmentVariable('EGL_PLATFORM_DIR', 'C:/Qt/5.11.1/msvc2017_64/include/QtANGLE', [EnvironmentVariableTarget]::Machine)
-
-RUN choco install -y python --version 3.6.6; \
-    $Env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
-    python -m pip --no-cache-dir install --no-warn-script-location \
-        wheel \
-        twine;
 
 RUN $vcpkg_dir = 'C:/vcpkg'; \
     git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git $vcpkg_dir; \
