@@ -38,7 +38,7 @@ RUN $vcpkg_dir = 'C:/vcpkg'; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
 RUN cd $Env:VCPKG_DIR; \
-    $vcpkg_triplet = x64-windows; \
+    $vcpkg_triplet = 'x64-windows'; \
     ./vcpkg install \
         zlib:$vcpkg_triplet \
         libepoxy[egl]:$vcpkg_triplet \
