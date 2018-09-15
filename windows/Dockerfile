@@ -57,5 +57,4 @@ RUN python -m pip --no-cache-dir install --no-warn-script-location \
         pandas
 
 RUN choco install -y \
-    nsis \
     wixtoolset
