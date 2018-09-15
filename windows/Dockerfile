@@ -38,21 +38,22 @@ RUN $vcpkg_dir = 'C:/vcpkg'; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
 RUN cd $Env:VCPKG_DIR; \
-    $vcpkg_triple = x64-windows; \
+    $vcpkg_triplet = x64-windows; \
     ./vcpkg install \
-        zlib:$vcpkg_triple \
-        libepoxy[egl]:$vcpkg_triple \
-        glm:$vcpkg_triple \
-        cgal:$vcpkg_triple \
-        hdf5:$vcpkg_triple \
-        openblas:$vcpkg_triple \
-        pybind11:$vcpkg_triple; \
-    ./vcpkg install opencv:$vcpkg_triple; \
-    ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triple; \
+        zlib:$vcpkg_triplet \
+        libepoxy[egl]:$vcpkg_triplet \
+        glm:$vcpkg_triplet \
+        cgal:$vcpkg_triplet \
+        hdf5:$vcpkg_triplet \
+        openblas:$vcpkg_triplet \
+        pybind11:$vcpkg_triplet; \
+    ./vcpkg install opencv:$vcpkg_triplet; \
+    ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
     Remove-Item -Recurse -Force -Path ./downloads; \
     Remove-Item -Recurse -Force -Path ./buildtrees; \
     Remove-Item -Recurse -Force -Path ./packages; \
-    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triple\"", [EnvironmentVariableTarget]::Machine);
+    [Environment]::SetEnvironmentVariable('VCPKG_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine);
 
 RUN python -m pip --no-cache-dir install --no-warn-script-location \
         numpy \
