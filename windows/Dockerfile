@@ -30,25 +30,29 @@ RUN choco install -y python --version 3.6.6; \
         wheel \
         twine;
 
-RUN git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git C:/vcpkg; \
-    cd C:/vcpkg; \
+RUN $vcpkg_dir = 'C:/vcpkg'; \
+    git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git $vcpkg_dir; \
+    cd $vcpkg_dir; \
     git checkout 247c77cbdee32767707f0390e1b4b4d16c2a9fef; \
-    ./scripts/bootstrap.ps1
+    ./scripts/bootstrap.ps1; \
+    [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
-RUN cd C:/vcpkg; \
+RUN cd $Env:VCPKG_DIR; \
+    $vcpkg_triple = x64-windows; \
     ./vcpkg install \
-        zlib:x64-windows \
-        libepoxy[egl]:x64-windows \
-        glm:x64-windows \
-        cgal:x64-windows \
-        hdf5:x64-windows \
-        openblas:x64-windows \
-        pybind11:x64-windows; \
-    ./vcpkg install opencv:x64-windows; \
-    ./vcpkg install mxnet[cpp,opencv]:x64-windows; \
-    Remove-Item -Recurse -Force -Path C:/vcpkg/downloads; \
-    Remove-Item -Recurse -Force -Path C:/vcpkg/buildtrees; \
-    Remove-Item -Recurse -Force -Path C:/vcpkg/packages;
+        zlib:$vcpkg_triple \
+        libepoxy[egl]:$vcpkg_triple \
+        glm:$vcpkg_triple \
+        cgal:$vcpkg_triple \
+        hdf5:$vcpkg_triple \
+        openblas:$vcpkg_triple \
+        pybind11:$vcpkg_triple; \
+    ./vcpkg install opencv:$vcpkg_triple; \
+    ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triple; \
+    Remove-Item -Recurse -Force -Path ./downloads; \
+    Remove-Item -Recurse -Force -Path ./buildtrees; \
+    Remove-Item -Recurse -Force -Path ./packages; \
+    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triple\"", [EnvironmentVariableTarget]::Machine);
 
 RUN python -m pip --no-cache-dir install --no-warn-script-location \
         numpy \
