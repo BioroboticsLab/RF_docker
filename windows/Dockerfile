@@ -63,5 +63,4 @@ RUN python -m pip --no-cache-dir install --no-warn-script-location \
         matplotlib \
         pandas
 
-COPY VsDevSh.ps1 C:/VsDevSh.ps1
-SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$ErrorActionPreference = 'Stop';", "C:/VsDevSh.ps1;"]
+COPY VsDevEnv.ps1 C:/VsDevEnv.ps1
