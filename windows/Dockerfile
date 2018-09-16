@@ -64,3 +64,5 @@ RUN python -m pip --no-cache-dir install --no-warn-script-location \
         pandas
 
 COPY VsDevEnv.ps1 C:/VsDevEnv.ps1
+
+RUN choco install -y curl
