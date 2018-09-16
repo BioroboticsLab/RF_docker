@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 build-ubuntu-18.04:
   stage: build
@@ -26,3 +27,10 @@ build-windows:
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows"
   after_script:
     - docker logout "${CI_REGISTRY}"
+
+trigger dependents:
+  stage: deploy
+  tags: [ linux, docker ]
+  image: git.imp.fu-berlin.de:5000/bioroboticslab/rf_docker:ubuntu-18.04
+  script:
+    - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://git.imp.fu-berlin.de/api/v4/projects/2576/trigger/pipeline
