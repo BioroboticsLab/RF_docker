@@ -24,6 +24,13 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
         twine
 COPY VsDevEnv.ps1 C:/VsDevEnv.ps1
 
+RUN curl.exe -L -o C:/cuda_9.2.148_win10_network.exe https://developer.nvidia.com/compute/cuda/9.2/Prod2/network_installers2/cuda_9.2.148_win10_network; \
+    Start-Process C:/cuda_9.2.148_win10_network.exe -NoNewWindow -Wait -ArgumentList '-s nvcc_9.2 cublas_9.2 cublas_dev_9.2 cudart_9.2 cufft_9.2 cufft_dev_9.2 curand_9.2 curand_dev_9.2 cusolver_9.2 cusolver_dev_9.2 cusparse_9.2 cusparse_dev_9.2 npp_9.2 npp_dev_9.2 nvrtc_9.2 nvrtc_dev_9.2 nvml_dev_9.2'; \
+    Remove-Item C:/cuda_9.2.148_win10_network.exe -Force; \
+    curl.exe -L -o C:/cuda_9.2.148.1_windows.exe https://developer.nvidia.com/compute/cuda/9.2/Prod2/patches/1/cuda_9.2.148.1_windows; \
+    Start-Process C:/cuda_9.2.148.1_windows.exe -NoNewWindow -Wait -ArgumentList '-s cublas_9.2 cublas_dev_9.2'; \
+    Remove-Item C:/cuda_9.2.148.1_windows.exe -Force
+
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     (New-Object Net.WebClient).DownloadFile('https://download.qt.io/official_releases/qt/5.11/5.11.1/qt-opensource-windows-x86-5.11.1.exe', 'C:/qt.exe'); \
