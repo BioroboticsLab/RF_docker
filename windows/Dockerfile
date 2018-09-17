@@ -49,7 +49,7 @@ RUN $vcpkg_dir = 'C:/vcpkg'; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
 RUN cd $Env:VCPKG_DIR; \
-    $vcpkg_triplet = 'x64-windows'; \
+    $vcpkg_triplet = 'x64-windows-14.13'; \
     ./vcpkg install \
         zlib:$vcpkg_triplet \
         libepoxy[egl]:$vcpkg_triplet \
@@ -58,8 +58,8 @@ RUN cd $Env:VCPKG_DIR; \
         hdf5:$vcpkg_triplet \
         openblas:$vcpkg_triplet \
         pybind11:$vcpkg_triplet; \
-    ./vcpkg install opencv:$vcpkg_triplet; \
-    ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
+    ./vcpkg install opencv[ffmpeg,ximea,cuda]:$vcpkg_triplet; \
+    ./vcpkg install mxnet[cpp,opencv,cuda]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
