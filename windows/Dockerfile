@@ -53,6 +53,9 @@ RUN cd $Env:VCPKG_DIR; \
         pybind11:$vcpkg_triplet; \
     ./vcpkg install opencv:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
+    Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
+    Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
+    Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
     Remove-Item -Recurse -Force -Path ./downloads; \
     Remove-Item -Recurse -Force -Path ./buildtrees; \
     Remove-Item -Recurse -Force -Path ./packages; \
