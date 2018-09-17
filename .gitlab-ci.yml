@@ -2,7 +2,7 @@ stages:
   - build
   - deploy
 
-build-ubuntu-18.04:
+build ubuntu-18.04:
   stage: build
   tags: [ linux, shell ]
   before_script:
@@ -17,7 +17,7 @@ build-ubuntu-18.04:
   after_script:
     - docker logout "${CI_REGISTRY}"
 
-build-windows:
+build windows:
   stage: build
   tags: [ windows, shell ]
   before_script:
