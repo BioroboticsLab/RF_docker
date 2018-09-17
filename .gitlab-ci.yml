@@ -2,20 +2,20 @@ stages:
   - build
   - deploy
 
-build-ubuntu-18.04:
-  stage: build
-  tags: [ linux, shell ]
-  before_script:
-    - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
-  script:
-    - GPU_DRIVER_VERSION="$(dpkg-query --showformat='${Version}' --show 'nvidia-driver-*')"
-    - CACHE_FILE="/var/lib/gitlab-runner/.local/share/rf_docker-gpu-driver-version"
-    - if [[ -f $CACHE_FILE ]] && [[ "$(cat $CACHE_FILE)" == "$GPU_DRIVER_VERSION" ]]; then OPTS=''; else OPTS='--no-cache'; fi
-    - echo -n $GPU_DRIVER_VERSION > $CACHE_FILE
-    - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04" ubuntu-18.04
-    - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04"
-  after_script:
-    - docker logout "${CI_REGISTRY}"
+# build-ubuntu-18.04:
+#   stage: build
+#   tags: [ linux, shell ]
+#   before_script:
+#     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+#   script:
+#     - GPU_DRIVER_VERSION="$(dpkg-query --showformat='${Version}' --show 'nvidia-driver-*')"
+#     - CACHE_FILE="/var/lib/gitlab-runner/.local/share/rf_docker-gpu-driver-version"
+#     - if [[ -f $CACHE_FILE ]] && [[ "$(cat $CACHE_FILE)" == "$GPU_DRIVER_VERSION" ]]; then OPTS=''; else OPTS='--no-cache'; fi
+#     - echo -n $GPU_DRIVER_VERSION > $CACHE_FILE
+#     - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04" ubuntu-18.04
+#     - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:ubuntu-18.04"
+#   after_script:
+#     - docker logout "${CI_REGISTRY}"
 
 build-windows:
   stage: build
@@ -28,9 +28,9 @@ build-windows:
   after_script:
     - docker logout "${CI_REGISTRY}"
 
-trigger dependents:
-  stage: deploy
-  tags: [ linux, docker ]
-  image: git.imp.fu-berlin.de:5000/bioroboticslab/rf_docker:ubuntu-18.04
-  script:
-    - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://git.imp.fu-berlin.de/api/v4/projects/2576/trigger/pipeline
+# trigger dependents:
+#   stage: deploy
+#   tags: [ linux, docker ]
+#   image: git.imp.fu-berlin.de:5000/bioroboticslab/rf_docker:ubuntu-18.04
+#   script:
+#     - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://git.imp.fu-berlin.de/api/v4/projects/2576/trigger/pipeline
