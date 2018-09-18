@@ -64,7 +64,7 @@ RUN cd $Env:VCPKG_DIR; \
         openblas:$vcpkg_triplet \
         pybind11:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,cuda]:$vcpkg_triplet; \
-    ./vcpkg install mxnet[cpp,opencv,cuda]:$vcpkg_triplet; \
+    ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
