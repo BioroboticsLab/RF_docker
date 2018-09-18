@@ -29,7 +29,12 @@ RUN curl.exe -L -o C:/cuda_9.2.148_win10_network.exe https://developer.nvidia.co
     Remove-Item C:/cuda_9.2.148_win10_network.exe -Force; \
     curl.exe -L -o C:/cuda_9.2.148.1_windows.exe https://developer.nvidia.com/compute/cuda/9.2/Prod2/patches/1/cuda_9.2.148.1_windows; \
     Start-Process C:/cuda_9.2.148.1_windows.exe -NoNewWindow -Wait -ArgumentList '-s cublas_9.2 cublas_dev_9.2'; \
-    Remove-Item C:/cuda_9.2.148.1_windows.exe -Force
+    Remove-Item C:/cuda_9.2.148.1_windows.exe -Force; \
+    curl.exe -L -o C:/cudnn-9.2-windows10-x64-v7.1.zip http://developer.download.nvidia.com/compute/redist/cudnn/v7.1.4/cudnn-9.2-windows10-x64-v7.1.zip; \
+    7z x C:/cudnn-9.2-windows10-x64-v7.1.zip; \
+    Copy-Item -Recurse -Force "./cuda/*" "$([Environment]::GetEnvironmentVariable('CUDA_PATH', [EnvironmentVariableTarget]::Machine))"; \
+    Remove-Item -Recurse -Force "./cuda"; \
+    Remove-Item -Force C:/cudnn-9.2-windows10-x64-v7.1.zip
 
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
