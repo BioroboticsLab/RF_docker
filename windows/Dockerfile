@@ -58,6 +58,8 @@ RUN $vcpkg_dir = 'C:/vcpkg'; \
     ./scripts/bootstrap.ps1; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
+COPY opengl32.dll C:/Windows/System32/opengl32.dll
+COPY nvcuda.dll C:/Windows/System32/nvcuda.dll
 RUN cd $Env:VCPKG_DIR; \
     $vcpkg_triplet = 'x64-windows-14.13'; \
     ./vcpkg install \
