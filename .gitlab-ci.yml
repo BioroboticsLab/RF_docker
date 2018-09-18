@@ -22,6 +22,10 @@ build windows:
   tags: [ windows, shell ]
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+    - Copy-Item 'C:/Windows/System32/opengl32.dll' 'windows/opengl32.dll'
+    - Copy-Item 'C:/Windows/System32/glu32.dll' 'windows/glu32.dll'
+    - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows/ddraw.dll'
+    - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows/nvcuda.dll'
   script:
     - docker build --isolation process --memory 12G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows" windows
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows"
