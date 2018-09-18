@@ -47,8 +47,9 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     [Environment]::SetEnvironmentVariable('EGL_PLATFORM_DIR', 'C:/Qt/5.11.1/msvc2017_64/include/QtANGLE', [EnvironmentVariableTarget]::Machine)
 
 RUN curl.exe -L -o C:/Basler_pylon_5.1.0.12681.exe https://www.baslerweb.com/fp-1535524585/media/downloads/software/pylon_software/Basler_pylon_5.1.0.12681.exe; \
-    Start-Process C:/Basler_pylon_5.1.0.12681.exe -NoNewWindow -Wait -ArgumentList '/quiet /install=SDKs;Runtime;GigE_Support;USB_Support;Camera_Link_Support;FireWire_Support;DirectShow;Twain'; \
-    Remove-Item -Force C:/Basler_pylon_5.1.0.12681.exe
+    Start-Process C:/Basler_pylon_5.1.0.12681.exe -NoNewWindow -Wait -ArgumentList '/quiet /install=SDKs /targetpath=C:/Pylon5'; \
+    Remove-Item -Force C:/Basler_pylon_5.1.0.12681.exe; \
+    [Environment]::SetEnvironmentVariable('Pylon5_DIR', 'C:/Pylon5/Development', [EnvironmentVariableTarget]::Machine);
 
 RUN $vcpkg_dir = 'C:/vcpkg'; \
     git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git $vcpkg_dir; \
