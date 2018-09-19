@@ -86,5 +86,4 @@ RUN cd $Env:VCPKG_DIR; \
 RUN python -m pip --no-cache-dir install --no-warn-script-location \
         numpy \
         scipy \
-        matplotlib \
         pandas
