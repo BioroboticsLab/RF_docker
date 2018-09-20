@@ -24,13 +24,14 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
         twine
 COPY VsDevEnv.ps1 C:/VsDevEnv.ps1
 
-RUN curl.exe -L -o C:/cuda_9.2.148_win10_network.exe https://developer.nvidia.com/compute/cuda/9.2/Prod2/network_installers2/cuda_9.2.148_win10_network; \
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/9.2/Prod2/network_installers2/cuda_9.2.148_win10_network', 'C:/cuda_9.2.148_win10_network.exe'); \
+    (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/9.2/Prod2/patches/1/cuda_9.2.148.1_windows', 'C:/cuda_9.2.148.1_windows.exe'); \
+    (New-Object Net.WebClient).DownloadFile('http://developer.download.nvidia.com/compute/redist/cudnn/v7.1.4/cudnn-9.2-windows10-x64-v7.1.zip', 'C:/cudnn-9.2-windows10-x64-v7.1.zip'); \
     Start-Process C:/cuda_9.2.148_win10_network.exe -NoNewWindow -Wait -ArgumentList '-s nvcc_9.2 cublas_9.2 cublas_dev_9.2 cudart_9.2 cufft_9.2 cufft_dev_9.2 curand_9.2 curand_dev_9.2 cusolver_9.2 cusolver_dev_9.2 cusparse_9.2 cusparse_dev_9.2 npp_9.2 npp_dev_9.2 nvrtc_9.2 nvrtc_dev_9.2 nvml_dev_9.2'; \
     Remove-Item -Force C:/cuda_9.2.148_win10_network.exe; \
-    curl.exe -L -o C:/cuda_9.2.148.1_windows.exe https://developer.nvidia.com/compute/cuda/9.2/Prod2/patches/1/cuda_9.2.148.1_windows; \
     Start-Process C:/cuda_9.2.148.1_windows.exe -NoNewWindow -Wait -ArgumentList '-s cublas_9.2 cublas_dev_9.2'; \
     Remove-Item -Force C:/cuda_9.2.148.1_windows.exe; \
-    curl.exe -L -o C:/cudnn-9.2-windows10-x64-v7.1.zip http://developer.download.nvidia.com/compute/redist/cudnn/v7.1.4/cudnn-9.2-windows10-x64-v7.1.zip; \
     7z x C:/cudnn-9.2-windows10-x64-v7.1.zip; \
     Copy-Item -Force -Recurse "./cuda/*" "$([Environment]::GetEnvironmentVariable('CUDA_PATH', [EnvironmentVariableTarget]::Machine))"; \
     Remove-Item -Force -Recurse "./cuda"; \
@@ -46,7 +47,8 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     [Environment]::SetEnvironmentVariable('Qt5_DIR', 'C:/Qt/5.11.1/msvc2017_64', [EnvironmentVariableTarget]::Machine); \
     [Environment]::SetEnvironmentVariable('EGL_PLATFORM_DIR', 'C:/Qt/5.11.1/msvc2017_64/include/QtANGLE', [EnvironmentVariableTarget]::Machine)
 
-RUN curl.exe -L -o C:/Basler_pylon_5.1.0.12681.exe https://www.baslerweb.com/fp-1535524585/media/downloads/software/pylon_software/Basler_pylon_5.1.0.12681.exe; \
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    (New-Object Net.WebClient).DownloadFile('https://www.baslerweb.com/fp-1535524585/media/downloads/software/pylon_software/Basler_pylon_5.1.0.12681.exe', 'C:/Basler_pylon_5.1.0.12681.exe'); \
     Start-Process C:/Basler_pylon_5.1.0.12681.exe -NoNewWindow -Wait -ArgumentList '/quiet /install=SDKs /targetpath=C:/Pylon5'; \
     Remove-Item -Force C:/Basler_pylon_5.1.0.12681.exe; \
     [Environment]::SetEnvironmentVariable('Pylon5_DIR', 'C:/Pylon5/Development', [EnvironmentVariableTarget]::Machine);
