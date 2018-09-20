@@ -73,7 +73,7 @@ RUN cd $Env:VCPKG_DIR; \
         cgal:$vcpkg_triplet \
         hdf5:$vcpkg_triplet \
         openblas:$vcpkg_triplet \
-        pybind11:$vcpkg_triplet; \
+        pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
