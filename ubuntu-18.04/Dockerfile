@@ -69,7 +69,7 @@ RUN python3.6 -m pip --no-cache-dir install \
 
 RUN cd /opt && \
     curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/1.3.0/apache-mxnet-src-1.3.0-incubating.tar.gz && \
-    tar -xf apache-mxnet-src-1.3.0-incubating.tar.gz && \
+    tar -xf apache-mxnet-src-1.3.0-incubating.tar.gz --owner root --group root --no-same-owner && \
     rm -f apache-mxnet-src-1.3.0-incubating.tar.gz && \
     mv apache-mxnet-src-1.3.0-incubating mxnet-1.3.0 && \
     cd mxnet-1.3.0 && \
