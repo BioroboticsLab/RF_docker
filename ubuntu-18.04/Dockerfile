@@ -113,14 +113,15 @@ RUN cd /tmp && \
     rm -rf pybind11-2.2.3
 
 RUN apt-get install -y \
+        qt5-default \
+        qtbase5-dev \
+        qtmultimedia5-dev \
+        libqt5charts5-dev \
         libepoxy-dev \
         libglm-dev \
         libegl1-mesa-dev \
         libcgal-dev \
-        libcgal-qt5-dev \
-        qtbase5-dev \
-        qtmultimedia5-dev \
-        libqt5charts5-dev
+        libcgal-qt5-dev
 
 RUN python3.6 -m pip --no-cache-dir install \
         numpy \
