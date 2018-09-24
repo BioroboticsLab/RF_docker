@@ -74,8 +74,8 @@ RUN cd $Env:VCPKG_DIR; \
         hdf5:$vcpkg_triplet \
         openblas:$vcpkg_triplet \
         pybind11:$vcpkg_triplet \
-        boost-program-options:$vcpkg_triplet; \
-        boost-bimap:$vcpkg_triplet; \
+        boost-program-options:$vcpkg_triplet \
+        boost-bimap:$vcpkg_triplet \
         boost-property-tree:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
@@ -93,8 +93,8 @@ RUN cd $Env:VCPKG_DIR; \
         hdf5:$vcpkg_triplet \
         openblas:$vcpkg_triplet \
         pybind11:$vcpkg_triplet \
-        boost-program-options:$vcpkg_triplet; \
-        boost-bimap:$vcpkg_triplet; \
+        boost-program-options:$vcpkg_triplet \
+        boost-bimap:$vcpkg_triplet \
         boost-property-tree:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
