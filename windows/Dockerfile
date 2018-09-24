@@ -82,11 +82,30 @@ RUN cd $Env:VCPKG_DIR; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
+    [Environment]::SetEnvironmentVariable('VCPKG_CUDA_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    [Environment]::SetEnvironmentVariable('VCPKG_CUDA_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    $vcpkg_triplet = 'x64-windows'; \
+    ./vcpkg install \
+        zlib:$vcpkg_triplet \
+        libepoxy[egl]:$vcpkg_triplet \
+        glm:$vcpkg_triplet \
+        cgal:$vcpkg_triplet \
+        hdf5:$vcpkg_triplet \
+        openblas:$vcpkg_triplet \
+        pybind11:$vcpkg_triplet \
+        boost-program-options:$vcpkg_triplet; \
+        boost-bimap:$vcpkg_triplet; \
+        boost-property-tree:$vcpkg_triplet; \
+    ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
+    ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
+    Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
+    Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
+    Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
+    [Environment]::SetEnvironmentVariable('VCPKG_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     Remove-Item -Force -Recurse ./downloads; \
     Remove-Item -Force -Recurse ./buildtrees; \
-    Remove-Item -Force -Recurse ./packages; \
-    [Environment]::SetEnvironmentVariable('VCPKG_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
-    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine);
+    Remove-Item -Force -Recurse ./packages;
 
 RUN python -m pip --no-cache-dir install --no-warn-script-location \
         numpy \
