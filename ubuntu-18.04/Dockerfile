@@ -149,6 +149,9 @@ ADD mxnet_profile.sh /etc/profile.d/mxnet.sh
 COPY launch.sh /sbin
 COPY sshd_config /etc/ssh/sshd_config
 
+ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /usr/local/share/ca-certificates/agki-nas01.imp.fu-berlin.de-ca-cert.crt
+RUN update-ca-certificates
+
 RUN apt-get clean
 
 WORKDIR "/root"
