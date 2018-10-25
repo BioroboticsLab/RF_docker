@@ -121,7 +121,9 @@ RUN apt-get install -y \
         libglm-dev \
         libegl1-mesa-dev \
         libcgal-dev \
-        libcgal-qt5-dev
+        libcgal-qt5-dev \
+		libjsoncpp-dev \
+		libwebsocketpp-dev
 
 RUN python3.6 -m pip --no-cache-dir install \
         numpy \

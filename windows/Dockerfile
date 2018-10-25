@@ -76,7 +76,9 @@ RUN cd $Env:VCPKG_DIR; \
         pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet \
         boost-bimap:$vcpkg_triplet \
-        boost-property-tree:$vcpkg_triplet; \
+        boost-property-tree:$vcpkg_triplet \
+        jsoncpp:$vcpkg_triplet \
+        websocketpp:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
@@ -95,7 +97,9 @@ RUN cd $Env:VCPKG_DIR; \
         pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet \
         boost-bimap:$vcpkg_triplet \
-        boost-property-tree:$vcpkg_triplet; \
+        boost-property-tree:$vcpkg_triplet \
+        jsoncpp:$vcpkg_triplet \
+        websocketpp:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
