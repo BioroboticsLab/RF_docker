@@ -6,7 +6,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
     choco install -y visualstudio2017buildtools; \
     choco install -y visualstudio2017-workload-vctools; \
-    Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.13'; \
+    Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.13 --add Microsoft.VisualStudio.Component.VC.ATL'; \
     choco install -y cmake --version 3.12.2 --installargs "ADD_CMAKE_TO_PATH=System"; \
     choco install -y \
         git \
@@ -56,7 +56,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
 RUN $vcpkg_dir = 'C:/vcpkg'; \
     git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git $vcpkg_dir; \
     cd $vcpkg_dir; \
-    git checkout ab60283cc6edd25b95c6fb1bd0a05e046adb20ac; \
+    git checkout 291f5bc0790653b94d73e625b9697a8c2d4c53e1; \
     ./scripts/bootstrap.ps1; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
@@ -76,7 +76,9 @@ RUN cd $Env:VCPKG_DIR; \
         pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet \
         boost-bimap:$vcpkg_triplet \
-        boost-property-tree:$vcpkg_triplet; \
+        boost-property-tree:$vcpkg_triplet \
+        jsoncpp:$vcpkg_triplet \
+        websocketpp:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
@@ -95,7 +97,9 @@ RUN cd $Env:VCPKG_DIR; \
         pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet \
         boost-bimap:$vcpkg_triplet \
-        boost-property-tree:$vcpkg_triplet; \
+        boost-property-tree:$vcpkg_triplet \
+        jsoncpp:$vcpkg_triplet \
+        websocketpp:$vcpkg_triplet; \
     ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
     ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
