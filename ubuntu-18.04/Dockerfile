@@ -65,7 +65,10 @@ RUN python3.6 -m pip --no-cache-dir install \
         requests \
         Pillow \
         wheel \
-        twine
+        twine \
+        h5py \
+        joblib \
+        psutil
 
 RUN cd /opt && \
     curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/1.3.0/apache-mxnet-src-1.3.0-incubating.tar.gz && \
