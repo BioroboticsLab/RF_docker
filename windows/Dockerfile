@@ -79,8 +79,11 @@ RUN cd $Env:VCPKG_DIR; \
         boost-property-tree:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
         websocketpp:$vcpkg_triplet; \
+    if (! $?) { exit 1 }; \
     ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
+    if (! $?) { exit 1 }; \
     ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
+    if (! $?) { exit 1 }; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
@@ -100,8 +103,11 @@ RUN cd $Env:VCPKG_DIR; \
         boost-property-tree:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
         websocketpp:$vcpkg_triplet; \
+    if (! $?) { exit 1 }; \
     ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
+    if (! $?) { exit 1 }; \
     ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
+    if (! $?) { exit 1 }; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
