@@ -56,7 +56,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
 RUN $vcpkg_dir = 'C:/vcpkg'; \
     git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git $vcpkg_dir; \
     cd $vcpkg_dir; \
-    git checkout f8e0bf421432f06390a14326eab8c99de7a56728; \
+    git checkout 5ca9c309bc60a5b681c53c9e4b2d0a170901e04a; \
     ./scripts/bootstrap.ps1; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
 
@@ -89,7 +89,7 @@ RUN cd $Env:VCPKG_DIR; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
     [Environment]::SetEnvironmentVariable('VCPKG_CUDA_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     [Environment]::SetEnvironmentVariable('VCPKG_CUDA_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
-    $vcpkg_triplet = 'x64-windows'; \
+    $vcpkg_triplet = 'x64-windows-14.15'; \
     ./vcpkg install \
         zlib:$vcpkg_triplet \
         libepoxy[egl]:$vcpkg_triplet \
