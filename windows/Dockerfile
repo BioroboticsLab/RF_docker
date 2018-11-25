@@ -121,3 +121,4 @@ RUN python -m pip --no-cache-dir install --no-warn-script-location \
         numpy \
         scipy \
         pandas
+COPY lib.ps1 C:/lib.ps1
