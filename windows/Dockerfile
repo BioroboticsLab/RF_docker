@@ -22,7 +22,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     python -m pip --no-cache-dir install --no-warn-script-location \
         wheel \
         twine
-COPY VsDevEnv.ps1 C:/VsDevEnv.ps1
+COPY Library.ps1 C:/Library.ps1
 
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/9.2/Prod2/network_installers2/cuda_9.2.148_win10_network', 'C:/cuda_9.2.148_win10_network.exe'); \
@@ -121,4 +121,3 @@ RUN python -m pip --no-cache-dir install --no-warn-script-location \
         numpy \
         scipy \
         pandas
-COPY lib.ps1 C:/lib.ps1
