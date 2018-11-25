@@ -64,9 +64,10 @@ COPY opengl32.dll C:/Windows/System32/opengl32.dll
 COPY glu32.dll C:/Windows/System32/glu32.dll
 COPY ddraw.dll C:/Windows/System32/ddraw.dll
 COPY nvcuda.dll C:/Windows/System32/nvcuda.dll
-RUN cd $Env:VCPKG_DIR; \
+RUN . /Library.ps1; \
+    cd $Env:VCPKG_DIR; \
     $vcpkg_triplet = 'x64-windows-14.13'; \
-    ./vcpkg install \
+    Must-Run ./vcpkg install \
         zlib:$vcpkg_triplet \
         libepoxy[egl]:$vcpkg_triplet \
         glm:$vcpkg_triplet \
@@ -79,18 +80,15 @@ RUN cd $Env:VCPKG_DIR; \
         boost-property-tree:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
         websocketpp:$vcpkg_triplet; \
-    if (! $?) { exit 1 }; \
-    ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
-    if (! $?) { exit 1 }; \
-    ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
-    if (! $?) { exit 1 }; \
+    Must-Run ./vcpkg install opencv[ffmpeg,ximea,cuda,opengl]:$vcpkg_triplet; \
+    Must-Run ./vcpkg install mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
     [Environment]::SetEnvironmentVariable('VCPKG_CUDA_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     [Environment]::SetEnvironmentVariable('VCPKG_CUDA_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     $vcpkg_triplet = 'x64-windows-14.15'; \
-    ./vcpkg install \
+    Must-Run ./vcpkg install \
         zlib:$vcpkg_triplet \
         libepoxy[egl]:$vcpkg_triplet \
         glm:$vcpkg_triplet \
@@ -103,11 +101,8 @@ RUN cd $Env:VCPKG_DIR; \
         boost-property-tree:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
         websocketpp:$vcpkg_triplet; \
-    if (! $?) { exit 1 }; \
-    ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
-    if (! $?) { exit 1 }; \
-    ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
-    if (! $?) { exit 1 }; \
+    Must-Run ./vcpkg install opencv[ffmpeg,ximea,opengl]:$vcpkg_triplet; \
+    Must-Run ./vcpkg install mxnet[cpp,opencv]:$vcpkg_triplet; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
