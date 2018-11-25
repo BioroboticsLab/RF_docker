@@ -18,7 +18,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Remove-Item -Force C:/ninja.zip; \
     [Environment]::SetEnvironmentVariable('PATH', "$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))" + ';C:/ninja', [EnvironmentVariableTarget]::Machine); \
     choco install -y python --version 3.6.6; \
-    $Env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
+    $env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
     python -m pip --no-cache-dir install --no-warn-script-location \
         wheel \
         twine
@@ -40,7 +40,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     (New-Object Net.WebClient).DownloadFile('https://download.qt.io/official_releases/qt/5.11/5.11.1/qt-opensource-windows-x86-5.11.1.exe', 'C:/qt.exe'); \
-    $Env:QT_INSTALL_DIR = 'C:/Qt'; \
+    $env:QT_INSTALL_DIR = 'C:/Qt'; \
     Start-Process C:/qt.exe -NoNewWindow -Wait -ArgumentList '--verbose --script C:/qtifwsilent.qs'; \
     Remove-Item -Force C:/qtifwsilent.qs; \
     Remove-Item -Force C:/qt.exe; \
@@ -65,7 +65,7 @@ COPY glu32.dll C:/Windows/System32/glu32.dll
 COPY ddraw.dll C:/Windows/System32/ddraw.dll
 COPY nvcuda.dll C:/Windows/System32/nvcuda.dll
 RUN . /Library.ps1; \
-    cd $Env:VCPKG_DIR; \
+    cd $env:VCPKG_DIR; \
     $vcpkg_triplet = 'x64-windows-14.13'; \
     Must-Run ./vcpkg install \
         zlib:$vcpkg_triplet \
@@ -86,7 +86,7 @@ RUN . /Library.ps1; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
     [Environment]::SetEnvironmentVariable('VCPKG_CUDA_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
-    [Environment]::SetEnvironmentVariable('VCPKG_CUDA_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    [Environment]::SetEnvironmentVariable('VCPKG_CUDA_INSTALL_DIR', "\"$env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     $vcpkg_triplet = 'x64-windows-14.15'; \
     Must-Run ./vcpkg install \
         zlib:$vcpkg_triplet \
@@ -107,7 +107,7 @@ RUN . /Library.ps1; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
     [Environment]::SetEnvironmentVariable('VCPKG_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
-    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$Env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     Remove-Item -Force -Recurse ./downloads; \
     Remove-Item -Force -Recurse ./buildtrees; \
     Remove-Item -Force -Recurse ./packages;
