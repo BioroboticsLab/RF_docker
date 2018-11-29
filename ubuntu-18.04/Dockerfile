@@ -106,14 +106,14 @@ RUN cd /tmp && \
     rm -rf hdf5-1.10.2*
 
 RUN cd /tmp && \
-    curl -sSLO https://github.com/pybind/pybind11/archive/v2.2.3.tar.gz && \
-    tar -xf v2.2.3.tar.gz && \
-    cd pybind11-2.2.3 && \
+    curl -sSLO https://github.com/pybind/pybind11/archive/v2.2.4.tar.gz && \
+    tar -xf v2.2.4.tar.gz && \
+    cd pybind11-2.2.4 && \
     cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DPYBIND11_TEST=off -G Ninja && \
     ninja -C build install && \
     cd .. && \
-    rm -f v2.2.3.tar.gz && \
-    rm -rf pybind11-2.2.3
+    rm -f v2.2.4.tar.gz && \
+    rm -rf pybind11-2.2.4
 
 RUN apt-get install -y \
         qt5-default \
