@@ -37,13 +37,13 @@ RUN apt-get install -y \
         python3-distutils
 
 RUN cd /tmp && \
-    curl -sSLO https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz && \
-    tar -xf cmake-3.12.0.tar.gz && \
-    cd cmake-3.12.0 && \
+    curl -sSLO https://cmake.org/files/v3.13/cmake-3.13.1.tar.gz && \
+    tar -xf cmake-3.13.1.tar.gz && \
+    cd cmake-3.13.1 && \
     ./configure --prefix=/usr/local && \
     make install -j$(nproc --all) && \
     cd .. && \
-    rm -rf cmake-3.12.0*
+    rm -rf cmake-3.13.1*
 
 RUN apt-get install -y \
         libopenblas-dev \
