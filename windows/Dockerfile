@@ -54,7 +54,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     [Environment]::SetEnvironmentVariable('Pylon5_DIR', 'C:/Pylon5/Development', [EnvironmentVariableTarget]::Machine);
 
 RUN $vcpkg_dir = 'C:/vcpkg'; \
-    git clone --depth=1 https://github.com/BioroboticsLab/RF_vcpkg.git $vcpkg_dir; \
+    git clone --depth=1 https://git.imp.fu-berlin.de/bioroboticslab/robofish/vcpkg.git $vcpkg_dir; \
     cd $vcpkg_dir; \
     git checkout 6cfbc2b9e5e159ec259082723a2383c5d05f8f49; \
     ./scripts/bootstrap.ps1; \
