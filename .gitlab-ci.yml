@@ -27,8 +27,12 @@ build windows:
     - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows/ddraw.dll'
     - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows/nvcuda.dll'
   script:
-    - docker build --isolation process --memory 15G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows" windows
-    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):windows"
+    - docker build --isolation process --memory 2G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows" windows/base
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows"
+    - docker build --isolation process --memory 15G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows" -f windows/devel/Dockerfile windows
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows"
+    - docker build --isolation process --memory 15G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows" -f windows/cuda-devel/Dockerfile windows
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows"
   after_script:
     - docker logout "${CI_REGISTRY}"
 
