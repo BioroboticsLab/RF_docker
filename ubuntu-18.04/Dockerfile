@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.2-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 
 LABEL maintainer="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
 LABEL authors="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
