@@ -1,17 +1,14 @@
 FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-windows
 
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-    (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/9.2/Prod2/network_installers2/cuda_9.2.148_win10_network', 'C:/cuda_9.2.148_win10_network.exe'); \
-    (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/9.2/Prod2/patches/1/cuda_9.2.148.1_windows', 'C:/cuda_9.2.148.1_windows.exe'); \
-    (New-Object Net.WebClient).DownloadFile('http://developer.download.nvidia.com/compute/redist/cudnn/v7.1.4/cudnn-9.2-windows10-x64-v7.1.zip', 'C:/cudnn-9.2-windows10-x64-v7.1.zip'); \
-    Start-Process C:/cuda_9.2.148_win10_network.exe -NoNewWindow -Wait -ArgumentList '-s nvcc_9.2 cublas_9.2 cublas_dev_9.2 cudart_9.2 cufft_9.2 cufft_dev_9.2 curand_9.2 curand_dev_9.2 cusolver_9.2 cusolver_dev_9.2 cusparse_9.2 cusparse_dev_9.2 npp_9.2 npp_dev_9.2 nvrtc_9.2 nvrtc_dev_9.2 nvml_dev_9.2'; \
-    Remove-Item -Force C:/cuda_9.2.148_win10_network.exe; \
-    Start-Process C:/cuda_9.2.148.1_windows.exe -NoNewWindow -Wait -ArgumentList '-s cublas_9.2 cublas_dev_9.2'; \
-    Remove-Item -Force C:/cuda_9.2.148.1_windows.exe; \
-    7z x C:/cudnn-9.2-windows10-x64-v7.1.zip; \
+    (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/10.0/Prod/network_installers/cuda_10.0.130_win10_network', 'C:/cuda_10.0.130_win10_network.exe'); \
+    (New-Object Net.WebClient).DownloadFile('http://developer.download.nvidia.com/compute/redist/cudnn/v7.4.1/cudnn-10.0-windows10-x64-v7.4.1.5.zip', 'C:/cudnn-10.0-windows10-x64-v7.4.1.5.zip'); \
+    Start-Process C:/cuda_10.0.130_win10_network.exe -NoNewWindow -Wait -ArgumentList '-s nvcc_10.0 cublas_10.0 cublas_dev_10.0 cudart_10.0 cufft_10.0 cufft_dev_10.0 curand_10.0 curand_dev_10.0 cusolver_10.0 cusolver_dev_10.0 cusparse_10.0 cusparse_dev_10.0 npp_10.0 npp_dev_10.0 nvrtc_10.0 nvrtc_dev_10.0 nvml_dev_10.0'; \
+    Remove-Item -Force C:/cuda_10.0.130_win10_network.exe; \
+    7z x C:/cudnn-10.0-windows10-x64-v7.4.1.5.zip; \
     Copy-Item -Force -Recurse "./cuda/*" "$([Environment]::GetEnvironmentVariable('CUDA_PATH', [EnvironmentVariableTarget]::Machine))"; \
     Remove-Item -Force -Recurse "./cuda"; \
-    Remove-Item -Force C:/cudnn-9.2-windows10-x64-v7.1.zip
+    Remove-Item -Force C:/cudnn-10.0-windows10-x64-v7.4.1.5.zip
 
 COPY opengl32.dll C:/Windows/System32/opengl32.dll
 COPY glu32.dll C:/Windows/System32/glu32.dll
