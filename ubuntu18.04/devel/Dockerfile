@@ -19,6 +19,7 @@ RUN apt-get update && \
         -DUSE_SIGNAL_HANDLER=ON \
         -DENABLE_CUDA_RTC=OFF \
         -DBUILD_CPP_EXAMPLES=OFF \
+        -DDO_NOT_BUILD_EXAMPLES=ON \
         -DUSE_GPERFTOOLS=OFF \
         -DUSE_JEMALLOC=OFF \
         -G Ninja && \
