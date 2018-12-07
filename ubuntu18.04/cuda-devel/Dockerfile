@@ -1,7 +1,7 @@
 FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-ubuntu18.04
 
 RUN apt-get update && \
-    apt-get install -y libopencv-dev \
+    apt-get install -y libopencv-dev && \
     cd /opt && \
     curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/1.3.1/apache-mxnet-src-1.3.1.rc0-incubating.tar.gz && \
     tar -xf apache-mxnet-src-1.3.1.rc0-incubating.tar.gz --owner root --group root --no-same-owner && \
