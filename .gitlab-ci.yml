@@ -12,8 +12,14 @@ build ubuntu-18.04:
     - CACHE_FILE="/var/lib/gitlab-runner/.local/share/robofish-docker-gpu-driver-version"
     - if [[ -f $CACHE_FILE ]] && [[ "$(cat $CACHE_FILE)" == "$GPU_DRIVER_VERSION" ]]; then OPTS=''; else OPTS='--no-cache'; fi
     - echo -n $GPU_DRIVER_VERSION > $CACHE_FILE
+    - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:base-ubuntu18.04" -f ubuntu18.04/base/Dockerfile ubuntu18.04/base
+    - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:base-ubuntu18.04"
+    - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:devel-ubuntu18.04" -f ubuntu18.04/devel/Dockerfile ubuntu18.04
+    - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:devel-ubuntu18.04"
     - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:cuda-devel-ubuntu18.04" -f ubuntu18.04/cuda-devel/Dockerfile ubuntu18.04
     - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:cuda-devel-ubuntu18.04"
+    - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:jupyter-ubuntu18.04" -f ubuntu18.04/jupyter/Dockerfile ubuntu18.04/jupyter
+    - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:jupyter-ubuntu18.04"
   after_script:
     - docker logout "${CI_REGISTRY}"
 
