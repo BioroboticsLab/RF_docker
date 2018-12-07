@@ -1,5 +1,6 @@
 FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-ubuntu18.04
 
+# NOTE: This still uses prebuild non-CUDA OpenCV. Compile OpenCV from source if CUDA support in OpenCV is required.
 RUN apt-get update && \
     apt-get install -y libopencv-dev && \
     cd /opt && \
