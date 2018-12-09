@@ -26,3 +26,21 @@ function Must-Run {
     Exit(1)
   }
 }
+
+#
+# Fetches GitLab CI job artifacts
+#
+function GitLab-Fetch-Artifacts {
+    & curl.exe -o artifacts.zip --header "JOB-TOKEN: $CI_JOB_TOKEN" "https://git.imp.fu-berlin.de/api/v4/projects/$($args[0])/jobs/artifacts/$($args[1])/download?job=$($args[2])"
+    7z e artifacts.zip; Remove-Item -Force artifacts.zip
+}
+
+#
+# Sets up a CMake package for find_package from a tarball
+#
+function CMake-Integrate-Package {
+    $name = $args[0]
+    7z e $name-*.tar.xz; Remove-Item -Force $name-*.tar.xz
+    7z x $name-*.tar; Remove-Item -Force $name-*.tar
+    [Environment]::SetEnvironmentVariable("${name}_ROOT", "$(resolve-path $name-*)")
+}
