@@ -56,7 +56,7 @@ RUN apt-get install -y \
         python3-pip \
         python3-setuptools \
         python3-distutils && \
-    curl -sSL -o /usr/local/bin/linuxdeployqt https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage && \
+    curl -sSL -o /usr/local/bin/linuxdeployqt https://github.com/probonopd/linuxdeployqt/releases/download/5/linuxdeployqt-5-x86_64.AppImage && \
     chmod +x /usr/local/bin/linuxdeployqt
 
 RUN python3.6 -m pip --no-cache-dir install \
