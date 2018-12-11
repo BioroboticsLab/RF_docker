@@ -50,14 +50,14 @@ RUN apt-get install -y \
         libcgal-dev \
         libcgal-qt5-dev \
         libjsoncpp-dev \
-        libwebsocketpp-dev
-
-RUN apt-get install -y \
+        libwebsocketpp-dev \
         python3 \
         python3-dev \
         python3-pip \
         python3-setuptools \
-        python3-distutils
+        python3-distutils && \
+    curl -sSL -o /usr/local/bin/linuxdeployqt https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage && \
+    chmod +x /usr/local/bin/linuxdeployqt
 
 RUN python3.6 -m pip --no-cache-dir install \
         graphviz \
