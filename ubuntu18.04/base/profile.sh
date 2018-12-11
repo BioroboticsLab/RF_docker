@@ -3,7 +3,7 @@ function gitlab-fetch-artifacts {
     7z e artifacts.zip; rm artifacts.zip
 }
 
-function gitlab-trigger {
+function gitlab-trigger-pipeline {
     curl --request POST --form "token=$2" --form "ref=$3" "https://git.imp.fu-berlin.de/api/v4/projects/$1/trigger/pipeline"
 }
 
