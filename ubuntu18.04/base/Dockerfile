@@ -33,6 +33,7 @@ RUN apt-get install -y \
         libgfortran3 \
         protobuf-compiler \
         graphviz \
+        fuse \
         qt5-default \
         qtbase5-dev \
         qtmultimedia5-dev \
