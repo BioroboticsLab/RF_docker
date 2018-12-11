@@ -36,11 +36,22 @@ function GitLab-Fetch-Artifacts {
 }
 
 #
-# Sets up a CMake package for find_package from a tarball
+# Sets up a CMake package for find_package from a tarball without copying
 #
 function CMake-Integrate-Package {
     $name = $args[0]
     7z e $name-*.tar.xz; Remove-Item -Force $name-*.tar.xz
     7z x $name-*.tar; Remove-Item -Force $name-*.tar
     [Environment]::SetEnvironmentVariable("${name}_ROOT", "$(resolve-path $name-*)")
+}
+
+#
+# Sets up a CMake package for find_package from a tarball
+#
+function CMake-Install-Package {
+    $name = $args[0]
+    7z e $name-*.tar.xz; Remove-Item -Force $name-*.tar.xz
+    7z x $name-*.tar; Remove-Item -Force $name-*.tar
+    Copy-Item -Recurse $name-* "C:/Program Files/"
+    Remove-Item -Recurse -Force $name-*
 }
