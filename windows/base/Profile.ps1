@@ -36,22 +36,29 @@ function GitLab-Fetch-Artifacts {
 }
 
 #
-# Sets up a CMake package for find_package from a tarball without copying
+# Unpacks a CMake package from its tarball into the vendor directory
 #
-function CMake-Integrate-Package {
+function CMake-Extract-Package {
     $name = $args[0]
     7z e $name-*.tar.xz; Remove-Item -Force $name-*.tar.xz
     7z x $name-*.tar; Remove-Item -Force $name-*.tar
-    [Environment]::SetEnvironmentVariable("${name}_ROOT", "$(resolve-path $name-*)")
+    New-Item -ItemType Directory -Force 'vendor'
+    Move-Item $name-* vendor/$name
 }
 
 #
-# Sets up a CMake package for find_package from a tarball
+# Enable discovery of a CMake package in the vendor directory via find_package
 #
-function CMake-Install-Package {
+function CMake-Enable-Package-Discovery {
     $name = $args[0]
-    7z e $name-*.tar.xz; Remove-Item -Force $name-*.tar.xz
-    7z x $name-*.tar; Remove-Item -Force $name-*.tar
-    Copy-Item -Recurse $name-* "C:/Program Files/"
-    Remove-Item -Recurse -Force $name-*
+    & cmd.exe /c mklink /J "C:/Program Files/$name" "$(resolve-path vendor/$name)"
+}
+
+#
+# Sets up a tarballed CMake package for find_package discovery
+#
+function CMake-Integrate-Package {
+    $name = $args[0]
+    CMake-Extract-Package $name
+    CMake-Enable-Package-Discovery $name
 }

@@ -7,8 +7,18 @@ function gitlab-trigger-pipeline {
     curl --request POST --form "token=$2" --form "ref=$3" "https://git.imp.fu-berlin.de/api/v4/projects/$1/trigger/pipeline"
 }
 
-function cmake-integrate-package {
+function cmake-extract-package {
     7z e $1-*.tar.xz; rm $1-*.tar.xz
     7z x $1-*.tar; rm $1-*.tar
-    ln -s $(realpath $1-*) /usr/local/$1
+    mkdir -p vendor
+    mv $1-* vendor/$1
+}
+
+function cmake-enable-package-discovery {
+    ln -s $(realpath vendor/$1) /usr/local/$1
+}
+
+function cmake-integrate-package {
+    cmake-extract-package $1
+    cmake-enable-package-discovery $1
 }
