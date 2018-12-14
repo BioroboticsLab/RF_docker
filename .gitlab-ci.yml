@@ -49,4 +49,4 @@ trigger dependents:
   script:
     - . /etc/profile.d/robofish.sh
     - gitlab-trigger-pipeline bioroboticslab%2Frobofish%2Finterfaces $CI_JOB_TOKEN master
-    - gitlab-trigger-pipeline bioroboticslab%2Fbiotracker%2Fbehavior_loader $CI_BIOTRACKER_BEHAVIOR_LOADER_TOKEN master
+    - gitlab-trigger-pipeline bioroboticslab%2Fbiotracker%2Fbehavior_loader $CI_JOB_TOKEN master
