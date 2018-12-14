@@ -48,5 +48,5 @@ trigger dependents:
   image: git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:devel-ubuntu18.04
   script:
     - . /etc/profile.d/robofish.sh
-    - gitlab-trigger-pipeline bioroboticslab%2Frobofish%2Finterfaces $CI_JOB_TOKEN master
+    - gitlab-trigger-pipeline bioroboticslab%2Frobofish%2Finterfaces        $CI_JOB_TOKEN master
     - gitlab-trigger-pipeline bioroboticslab%2Fbiotracker%2Fbehavior_loader $CI_JOB_TOKEN master
