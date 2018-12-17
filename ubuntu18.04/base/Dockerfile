@@ -71,7 +71,7 @@ RUN python3.6 -m pip --no-cache-dir install \
         twine \
         h5py \
         joblib \
-        psutil 
+        psutil
 
 RUN cd /tmp && \
     curl -sSLO https://cmake.org/files/v3.13/cmake-3.13.1.tar.gz && \
