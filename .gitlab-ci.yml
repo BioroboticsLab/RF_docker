@@ -45,6 +45,7 @@ build windows:
 trigger dependents:
   stage: deploy
   tags: [ linux, docker ]
+  dependencies: []
   image: git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:devel-ubuntu18.04
   script:
     - . /etc/profile.d/robofish.sh
