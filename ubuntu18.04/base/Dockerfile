@@ -51,6 +51,8 @@ RUN apt-get install -y \
         libcgal-qt5-dev \
         libjsoncpp-dev \
         libwebsocketpp-dev \
+        libfreetype6-dev \
+        libharfbuzz-dev \
         python3 \
         python3-dev \
         python3-pip \

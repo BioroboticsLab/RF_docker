@@ -29,7 +29,9 @@ RUN . $Profile; \
         boost-bimap:$vcpkg_triplet \
         boost-property-tree:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
-        websocketpp:$vcpkg_triplet; \
+        websocketpp:$vcpkg_triplet \
+        freetype:$vcpkg_triplet \
+        harfbuzz:$vcpkg_triplet; \
     Must-Run ./vcpkg install "\"opencv[cuda,ffmpeg,ximea,opengl,contrib,ipp,dnn]:$vcpkg_triplet\""; \
     Must-Run ./vcpkg install "\"mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet\""; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
