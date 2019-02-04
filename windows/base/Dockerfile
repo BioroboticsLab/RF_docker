@@ -7,7 +7,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     choco install -y visualstudio2017buildtools; \
     choco install -y visualstudio2017-workload-vctools; \
     Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.16 --add Microsoft.VisualStudio.Component.VC.ATL'; \
-    choco install -y cmake --version 3.13.1 --installargs "ADD_CMAKE_TO_PATH=System"; \
+    choco install -y cmake --version 3.13.3 --installargs "ADD_CMAKE_TO_PATH=System"; \
     choco install -y \
         git \
         curl \
