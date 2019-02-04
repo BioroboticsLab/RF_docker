@@ -19,7 +19,7 @@ RUN . $Profile; \
     $vcpkg_triplet = 'x64-windows-14.16'; \
     Must-Run ./vcpkg install \
         zlib:$vcpkg_triplet \
-        libepoxy[egl]:$vcpkg_triplet \
+        libepoxy:$vcpkg_triplet \
         glm:$vcpkg_triplet \
         cgal:$vcpkg_triplet \
         hdf5:$vcpkg_triplet \
