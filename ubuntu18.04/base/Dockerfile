@@ -9,17 +9,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
-    apt-get update
-
-RUN apt-get install -y locales && \
+    apt-get update && \
+    apt-get install -y locales && \
     locale-gen en_US.UTF-8 && \
     echo $TZ > /etc/timezone && \
     apt-get install -y tzdata && \
     rm /etc/localtime && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-    dpkg-reconfigure -f noninteractive tzdata
-
-RUN apt-get install -y --no-install-recommends \
+    dpkg-reconfigure -f noninteractive tzdata && \
+    apt-get install -y --no-install-recommends \
         build-essential \
         pkg-config \
         gcc-8 g++-8 \
@@ -27,9 +25,8 @@ RUN apt-get install -y --no-install-recommends \
         curl \
         git \
         p7zip-full \
-        file
-
-RUN apt-get install -y \
+        file && \
+    apt-get install -y \
         libgfortran3 \
         protobuf-compiler \
         graphviz \
