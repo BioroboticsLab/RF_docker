@@ -73,13 +73,13 @@ RUN python3.6 -m pip --no-cache-dir install \
         psutil
 
 RUN cd /tmp && \
-    curl -sSLO https://cmake.org/files/v3.13/cmake-3.13.1.tar.gz && \
-    tar -xf cmake-3.13.1.tar.gz && \
-    cd cmake-3.13.1 && \
+    curl -sSLO https://cmake.org/files/v3.13/cmake-3.13.3.tar.gz && \
+    tar -xf cmake-3.13.3.tar.gz && \
+    cd cmake-3.13.3 && \
     ./configure --prefix=/usr/local && \
     make install -j$(nproc --all) && \
     cd .. && \
-    rm -rf cmake-3.13.1*
+    rm -rf cmake-3.13.3*
 
 COPY hdf5-1.10.2-no-trailing-attributes.patch /tmp
 RUN cd /tmp && \
