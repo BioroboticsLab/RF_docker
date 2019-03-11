@@ -12,6 +12,6 @@ X11UseLocalhost no
 PrintMotd no
 PrintLastLog no
 
-Subsystem       sftp    /usr/lib64/misc/sftp-server
+Subsystem       sftp    /usr/lib/openssh/sftp-server
 
 AcceptEnv LANG LC_*
