@@ -42,13 +42,17 @@ build windows:
   after_script:
     - docker logout "${CI_REGISTRY}"
 
-trigger dependents:
+trigger robofish/interfaces:
   stage: deploy
-  tags: [ linux, docker ]
-  dependencies: []
-  image: git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:devel-ubuntu18.04
-  script:
-    - . /etc/profile.d/robofish.sh
-    - gitlab-trigger-pipeline bioroboticslab%2Frobofish%2Finterfaces        $CI_JOB_TOKEN master
-    - gitlab-trigger-pipeline bioroboticslab%2Fbiotracker%2Fbehavior_loader $CI_JOB_TOKEN master
-    - gitlab-trigger-pipeline bioroboticslab%2Fbiotracker%2Finterfaces      $CI_JOB_TOKEN master
+  trigger:
+    project: bioroboticslab/robofish/interfaces
+
+trigger biotracker/interfaces:
+  stage: deploy
+  trigger:
+    project: bioroboticslab/biotracker/interfaces
+
+trigger biotracker/behavior_loader:
+  stage: deploy
+  trigger:
+    project: bioroboticslab/biotracker/behavior_loader
