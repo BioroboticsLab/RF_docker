@@ -29,6 +29,7 @@ RUN . $Profile; \
         websocketpp:$vcpkg_triplet \
         freetype:$vcpkg_triplet \
         harfbuzz:$vcpkg_triplet \
+        rpclib:$vcpkg_triplet \
         "\"opencv[cuda,ffmpeg,ximea,opengl,contrib,ipp,dnn]:$vcpkg_triplet\"" \
         "\"mxnet[cpp,opencv,cuda,cudnn]:$vcpkg_triplet\""; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
