@@ -17,7 +17,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     7z e C:/ninja.zip -oC:/ninja -y; \
     Remove-Item -Force C:/ninja.zip; \
     [Environment]::SetEnvironmentVariable('PATH', "$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))" + ';C:/ninja', [EnvironmentVariableTarget]::Machine); \
-    choco install -y python --version 3.7.1; \
+    choco install -y python --version 3.7.2; \
     $env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
     python -m pip --no-cache-dir install --no-warn-script-location wheel
 COPY Profile.ps1 C:/Users/ContainerAdministrator/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
