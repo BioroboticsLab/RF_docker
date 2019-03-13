@@ -29,9 +29,9 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     [Environment]::SetEnvironmentVariable('Qt5_DIR', 'C:/Qt/5.12.1/msvc2017_64', [EnvironmentVariableTarget]::Machine)
 
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-    (New-Object Net.WebClient).DownloadFile('https://www.baslerweb.com/fp-1535524585/media/downloads/software/pylon_software/Basler_pylon_5.1.0.12681.exe', 'C:/Basler_pylon_5.1.0.12681.exe'); \
-    Start-Process C:/Basler_pylon_5.1.0.12681.exe -NoNewWindow -Wait -ArgumentList '/quiet /install=SDKs /targetpath=C:/Pylon5'; \
-    Remove-Item -Force C:/Basler_pylon_5.1.0.12681.exe; \
+    (New-Object Net.WebClient).DownloadFile('https://www.baslerweb.com/fp-1551786641/media/downloads/software/pylon_software/Basler_pylon_5.2.0.13457.exe', 'C:/Basler_pylon_5.2.0.13457.exe'); \
+    Start-Process C:/Basler_pylon_5.2.0.13457.exe -NoNewWindow -Wait -ArgumentList '/quiet /install=SDKs /targetpath=C:/Pylon5'; \
+    Remove-Item -Force C:/Basler_pylon_5.2.0.13457.exe; \
     [Environment]::SetEnvironmentVariable('Pylon5_DIR', 'C:/Pylon5/Development', [EnvironmentVariableTarget]::Machine);
 
 RUN $vcpkg_dir = 'C:/vcpkg'; \
