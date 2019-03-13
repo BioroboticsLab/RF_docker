@@ -102,6 +102,16 @@ RUN cd /tmp && \
     rm -f v2.2.4.tar.gz && \
     rm -rf pybind11-2.2.4
 
+RUN cd /tmp && \
+    curl -sSLO https://github.com/rpclib/rpclib/archive/v2.2.1.tar.gz && \
+    tar -xf v2.2.1.tar.gz && \
+    cd rpclib-2.2.1 && \
+    cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja && \
+    ninja -C build install && \
+    cd .. && \
+    rm -f v2.2.1.tar.gz && \
+    rm -rf rpclib-2.2.1
+
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /usr/local/share/ca-certificates/agki-nas01.imp.fu-berlin.de-ca-cert.crt
 RUN update-ca-certificates
 
