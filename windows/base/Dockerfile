@@ -8,15 +8,12 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     choco install -y visualstudio2017-workload-vctools; \
     Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.16 --add Microsoft.VisualStudio.Component.VC.ATL'; \
     choco install -y cmake --version 3.13.4 --installargs "ADD_CMAKE_TO_PATH=System"; \
+    choco install -y kitware-ninja --version 1.8.2.8127911; \
     choco install -y \
         git \
         curl \
         7zip \
         wixtoolset; \
-    (New-Object Net.WebClient).DownloadFile('https://github.com/Kitware/ninja/releases/download/v1.8.2.g972a7.kitware.dyndep-1/ninja-1.8.2.g972a7.kitware.dyndep-1_i686-pc-windows-msvc.zip', 'C:/ninja.zip'); \
-    7z e C:/ninja.zip -oC:/ninja -y; \
-    Remove-Item -Force C:/ninja.zip; \
-    [Environment]::SetEnvironmentVariable('PATH', "$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))" + ';C:/ninja', [EnvironmentVariableTarget]::Machine); \
     choco install -y python --version 3.7.2; \
     $env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
     python -m pip --no-cache-dir install --no-warn-script-location wheel
