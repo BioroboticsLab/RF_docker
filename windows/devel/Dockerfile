@@ -7,22 +7,19 @@ RUN . $Profile; \
     cd $env:VCPKG_DIR; \
     $vcpkg_triplet = 'x64-windows-14.16'; \
     Must-Run ./vcpkg install \
-        zlib:$vcpkg_triplet \
         libepoxy:$vcpkg_triplet \
         glm:$vcpkg_triplet \
         cgal:$vcpkg_triplet \
         hdf5:$vcpkg_triplet \
-        openblas:$vcpkg_triplet \
         pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet \
-        boost-bimap:$vcpkg_triplet \
         boost-property-tree:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
         websocketpp:$vcpkg_triplet \
         freetype:$vcpkg_triplet \
-        harfbuzz:$vcpkg_triplet; \
-    Must-Run ./vcpkg install "\"opencv[ffmpeg,ximea,opengl,contrib,ipp,dnn]:$vcpkg_triplet\""; \
-    Must-Run ./vcpkg install "\"mxnet[cpp,opencv]:$vcpkg_triplet\""; \
+        harfbuzz:$vcpkg_triplet \
+        "\"opencv[ffmpeg,ximea,opengl,contrib,ipp,dnn]:$vcpkg_triplet\"" \
+        "\"mxnet[cpp,opencv]:$vcpkg_triplet\""; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flang.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/flangrti.dll ./installed/$vcpkg_triplet/bin/; \
     Copy-Item ./downloads/tools/flang/5.0.0/Library/bin/libomp.dll ./installed/$vcpkg_triplet/bin/; \
