@@ -5,10 +5,11 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     (New-Object Net.WebClient).DownloadFile('https://developer.download.nvidia.com/compute/redist/cudnn/v7.5.0/cudnn-10.1-windows10-x64-v7.5.0.56.zip', 'C:/cudnn.zip'); \
     Start-Process C:/cuda_10.1.105_win10_network.exe -NoNewWindow -Wait -ArgumentList '-s nvcc_10.1 cublas_10.1 cublas_dev_10.1 cudart_10.1 cufft_10.1 cufft_dev_10.1 curand_10.1 curand_dev_10.1 cusolver_10.1 cusolver_dev_10.1 cusparse_10.1 cusparse_dev_10.1 npp_10.1 npp_dev_10.1 nvrtc_10.1 nvrtc_dev_10.1 nvml_dev_10.1'; \
     Remove-Item -Force C:/cuda_10.1.105_win10_network.exe; \
-    cd /; \
+    C: ; \
     ls /; \
-    7z l cudnn.zip; \
-    7z x cudnn.zip; \
+    choco install 7zip --force; \
+    7z l C:/cudnn.zip; \
+    7z x C:/cudnn.zip; \
     Copy-Item -Force -Recurse "./cuda/*" "$([Environment]::GetEnvironmentVariable('CUDA_PATH', [EnvironmentVariableTarget]::Machine))"; \
     Remove-Item -Force -Recurse "./cuda"; \
     Remove-Item -Force /cudnn.zip
