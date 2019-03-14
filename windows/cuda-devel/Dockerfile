@@ -7,9 +7,8 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Remove-Item -Force C:/cuda_10.1.105_win10_network.exe; \
     C: ; \
     ls /; \
-    choco install 7zip --force; \
-    7z l C:/cudnn.zip; \
-    7z x C:/cudnn.zip; \
+    choco install unzip --force; \
+    unzip C:/cudnn.zip; \
     Copy-Item -Force -Recurse "./cuda/*" "$([Environment]::GetEnvironmentVariable('CUDA_PATH', [EnvironmentVariableTarget]::Machine))"; \
     Remove-Item -Force -Recurse "./cuda"; \
     Remove-Item -Force /cudnn.zip
