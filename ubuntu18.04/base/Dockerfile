@@ -54,7 +54,8 @@ RUN apt-get update && \
         python3-dev \
         python3-pip \
         python3-setuptools \
-        python3-distutils && \
+        python3-distutils \
+        python3-venv && \
     curl -sSL -o /usr/local/bin/linuxdeployqt https://github.com/probonopd/linuxdeployqt/releases/download/5/linuxdeployqt-5-x86_64.AppImage && \
     chmod +x /usr/local/bin/linuxdeployqt
 
