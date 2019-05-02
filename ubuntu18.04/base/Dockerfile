@@ -60,7 +60,7 @@ RUN apt-get update && \
 
 RUN python3.6 -m pip --no-cache-dir install \
         graphviz \
-        opencv-python \
+        opencv-python==3.4.5.20 \
         nose \
         nose-timer \
         pylint \
