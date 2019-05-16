@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+FROM nvidia/cudagl:10.0-devel-ubuntu18.04
 
 LABEL maintainer="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
 LABEL authors="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
@@ -27,6 +27,7 @@ RUN apt-get update && \
         p7zip-full \
         file && \
     apt-get install -y \
+        libcudnn7-dev \
         libgfortran3 \
         protobuf-compiler \
         graphviz \
