@@ -32,6 +32,7 @@ RUN apt-get update && \
         protobuf-compiler \
         graphviz \
         fuse \
+        ffmpeg \
         qt5-default \
         qtbase5-dev \
         qtmultimedia5-dev \
