@@ -25,6 +25,7 @@ RUN . $Profile; \
         pybind11:$vcpkg_triplet \
         boost-program-options:$vcpkg_triplet \
         boost-property-tree:$vcpkg_triplet \
+        boost-circular-buffer:$vcpkg_triplet \
         jsoncpp:$vcpkg_triplet \
         websocketpp:$vcpkg_triplet \
         freetype:$vcpkg_triplet \
