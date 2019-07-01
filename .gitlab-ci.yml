@@ -23,22 +23,22 @@ build ubuntu-18.04:
   after_script:
     - docker logout "${CI_REGISTRY}"
 
-build windows:
+build windows-1809:
   stage: build
-  tags: [ windows, shell ]
+  tags: [ windows1809, shell ]
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
-    - Copy-Item 'C:/Windows/System32/opengl32.dll' 'windows/opengl32.dll'
-    - Copy-Item 'C:/Windows/System32/glu32.dll' 'windows/glu32.dll'
-    - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows/ddraw.dll'
-    - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows/nvcuda.dll'
+    - Copy-Item 'C:/Windows/System32/opengl32.dll' 'windows1809/opengl32.dll'
+    - Copy-Item 'C:/Windows/System32/glu32.dll' 'windows1809/glu32.dll'
+    - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows1809/ddraw.dll'
+    - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows1809/nvcuda.dll'
   script:
-    - docker build --isolation process --memory 2G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows" windows/base
-    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows"
-    - docker build --isolation process --memory 15G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows" -f windows/devel/Dockerfile windows
-    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows"
-    - docker build --isolation process --memory 15G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows" -f windows/cuda-devel/Dockerfile windows
-    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows"
+    - docker build --isolation process --memory 2G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809" windows1809/base
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809"
+    - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809" -f windows1809/devel/Dockerfile windows1809
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809"
+    - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows1809" -f windows1809/cuda-devel/Dockerfile windows1809
+    - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows1809"
   after_script:
     - docker logout "${CI_REGISTRY}"
 

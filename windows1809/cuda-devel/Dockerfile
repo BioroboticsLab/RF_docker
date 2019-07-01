@@ -1,4 +1,4 @@
-FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-windows
+FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-windows1809
 
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     (New-Object Net.WebClient).DownloadFile('https://developer.nvidia.com/compute/cuda/10.1/Prod/network_installers/cuda_10.1.105_win10_network.exe', 'C:/cuda_10.1.105_win10_network.exe'); \

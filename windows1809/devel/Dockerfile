@@ -1,4 +1,4 @@
-FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-windows
+FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-windows1809
 
 COPY opengl32.dll C:/Windows/System32/opengl32.dll
 COPY glu32.dll C:/Windows/System32/glu32.dll

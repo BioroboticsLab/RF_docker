@@ -1,4 +1,4 @@
-FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-ltsc2016
+FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-ltsc2019
 
 SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$ErrorActionPreference = 'Stop';"]
 
