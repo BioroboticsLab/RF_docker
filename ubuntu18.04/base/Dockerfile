@@ -96,14 +96,14 @@ RUN cd /tmp && \
     rm -rf hdf5-1.10.2*
 
 RUN cd /tmp && \
-    curl -sSLO https://github.com/pybind/pybind11/archive/v2.2.4.tar.gz && \
-    tar -xf v2.2.4.tar.gz && \
-    cd pybind11-2.2.4 && \
+    curl -sSLO https://github.com/pybind/pybind11/archive/v2.3.0.tar.gz && \
+    tar -xf v2.3.0.tar.gz && \
+    cd pybind11-2.3.0 && \
     cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DPYBIND11_TEST=off -G Ninja && \
     ninja -C build install && \
     cd .. && \
-    rm -f v2.2.4.tar.gz && \
-    rm -rf pybind11-2.2.4
+    rm -f v2.3.0.tar.gz && \
+    rm -rf pybind11-2.3.0
 
 RUN cd /tmp && \
     curl -sSLO https://github.com/rpclib/rpclib/archive/v2.2.1.tar.gz && \
