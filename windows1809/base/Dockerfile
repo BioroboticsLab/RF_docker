@@ -4,7 +4,7 @@ SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$Erro
 
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
-    choco install -y cmake --version 3.13.4 --installargs "ADD_CMAKE_TO_PATH=System"; \
+    choco install -y cmake --version 3.14.5 --installargs "ADD_CMAKE_TO_PATH=System"; \
     choco install -y kitware-ninja --version 1.8.2.8127911; \
     choco install -y \
         git \
