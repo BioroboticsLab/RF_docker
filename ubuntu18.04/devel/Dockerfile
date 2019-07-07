@@ -25,6 +25,6 @@ RUN apt-get update && \
         -G Ninja && \
     ninja -C build && \
     cd python && \
-    python3 setup.py install && \
+    python3.7 setup.py install && \
     apt-get clean
 ADD mxnet_profile.sh /etc/profile.d/mxnet.sh

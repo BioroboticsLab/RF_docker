@@ -1,6 +1,6 @@
 FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:cuda-devel-ubuntu18.04
 
-RUN python3.6 -m pip --no-cache-dir install \
+RUN python3.7 -m pip --no-cache-dir install \
         numpy \
         scipy \
         matplotlib \

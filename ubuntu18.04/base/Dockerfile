@@ -52,16 +52,16 @@ RUN apt-get update && \
         libwebsocketpp-dev \
         libfreetype6-dev \
         libharfbuzz-dev \
-        python3 \
-        python3-dev \
+        python3.7 \
+        python3.7-dev \
+        python3.7-venv \
         python3-pip \
         python3-setuptools \
-        python3-distutils \
-        python3-venv && \
+        python3-distutils && \
     curl -sSL -o /usr/local/bin/linuxdeployqt https://github.com/probonopd/linuxdeployqt/releases/download/5/linuxdeployqt-5-x86_64.AppImage && \
     chmod +x /usr/local/bin/linuxdeployqt
 
-RUN python3.6 -m pip --no-cache-dir install \
+RUN python3.7 -m pip --no-cache-dir install \
         graphviz \
         opencv-python==3.4.5.20 \
         nose \
