@@ -11,7 +11,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
         curl \
         7zip \
         wixtoolset; \
-    choco install -y python --version 3.7.2; \
+    choco install -y python --version 3.7.3; \
     $env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
     python -m pip --no-cache-dir install --no-warn-script-location wheel; \
     choco install -y visualstudio2017buildtools; \
