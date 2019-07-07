@@ -37,6 +37,6 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
 RUN $vcpkg_dir = 'C:/vcpkg'; \
     git clone --depth=1 https://git.imp.fu-berlin.de/bioroboticslab/robofish/vcpkg.git $vcpkg_dir; \
     cd $vcpkg_dir; \
-    git checkout 9af73e3bd779e7832a87b7f08a642c22bc8d956a; \
+    git checkout 3d06a746dd62e6957b2a7dfce1e88ef4ba073a9f; \
     ./scripts/bootstrap.ps1; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
