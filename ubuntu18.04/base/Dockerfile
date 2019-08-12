@@ -6,6 +6,7 @@ LABEL authors="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
 ENV TZ=Europe/Berlin
 ENV DEBIAN_FRONTEND=noninteractive
 
+COPY qtifwsilent.qs /tmp/qtifwsilent.qs
 RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
@@ -33,10 +34,6 @@ RUN apt-get update && \
         graphviz \
         fuse \
         ffmpeg \
-        qt5-default \
-        qtbase5-dev \
-        qtmultimedia5-dev \
-        libqt5charts5-dev \
         libboost-all-dev \
         libopenblas-dev \
         liblapack-dev \
@@ -47,7 +44,6 @@ RUN apt-get update && \
         libglm-dev \
         libegl1-mesa-dev \
         libcgal-dev \
-        libcgal-qt5-dev \
         libjsoncpp-dev \
         libwebsocketpp-dev \
         libfreetype6-dev \
@@ -58,8 +54,15 @@ RUN apt-get update && \
         python3-pip \
         python3-setuptools \
         python3-distutils && \
+    cd /tmp && \
+    curl -sSLO https://download.qt.io/official_releases/qt/5.12/5.12.4/qt-opensource-linux-x64-5.12.4.run && \
+    chmod +x qt-opensource-linux-x64-5.12.4.run && \
+    env QT_INSTALL_DIR=/opt/qt5 ./qt-opensource-linux-x64-5.12.4.run --script qtifwsilent.qs -platform minimal && \
+    rm qt-opensource-linux-x64-5.12.4.run && \
+    rm qtifwsilent.qs && \
     curl -sSL -o /usr/local/bin/linuxdeployqt https://github.com/probonopd/linuxdeployqt/releases/download/5/linuxdeployqt-5-x86_64.AppImage && \
     chmod +x /usr/local/bin/linuxdeployqt
+ENV Qt5_DIR /opt/qt5/5.12.4/gcc_64/lib/cmake/Qt5
 
 RUN python3.7 -m pip --no-cache-dir install \
         graphviz \
