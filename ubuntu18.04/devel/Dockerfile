@@ -27,4 +27,4 @@ RUN apt-get update && \
     cd python && \
     python3.7 setup.py install && \
     apt-get clean
-ADD mxnet_profile.sh /etc/profile.d/mxnet.sh
+ENV MXNet_DIR /opt/mxnet-1.4.1
