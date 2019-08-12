@@ -26,7 +26,8 @@ RUN apt-get update && \
         curl \
         git \
         p7zip-full \
-        file && \
+        file \
+        nano && \
     apt-get install -y \
         libcudnn7-dev \
         libgfortran3 \
