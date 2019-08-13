@@ -49,6 +49,9 @@ RUN apt-get update && \
         libwebsocketpp-dev \
         libfreetype6-dev \
         libharfbuzz-dev \
+        libpulse-mainloop-glib0 \
+        libxkbcommon-x11-0 \
+        libgstreamer-plugins-base1.0-0 \
         python3.7 \
         python3.7-dev \
         python3.7-venv \
