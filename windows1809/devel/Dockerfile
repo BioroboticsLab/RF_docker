@@ -15,6 +15,7 @@ RUN . $Profile; \
         boost-program-options \
         boost-property-tree \
         boost-circular-buffer \
+        boost-timer \
         jsoncpp \
         websocketpp \
         freetype \
