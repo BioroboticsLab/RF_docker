@@ -31,7 +31,7 @@ build windows-1809:
     - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows1809/ddraw.dll'
     - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows1809/nvcuda.dll'
   script:
-    - docker build --isolation process --memory 2G --pull -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809" windows1809/base
+    - docker build --isolation process --memory 2G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809" windows1809/base
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809"
     - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809" -f windows1809/devel/Dockerfile windows1809
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809"
