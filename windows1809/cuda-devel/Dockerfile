@@ -32,6 +32,7 @@ RUN . $Profile; \
         freetype \
         harfbuzz \
         rpclib \
+        eigen3 \
         "\"opencv3[cuda,ffmpeg,ximea,opengl,contrib,ipp,dnn]\"" \
         "\"mxnet[cpp,opencv,cuda,cudnn]\""; \
     [Environment]::SetEnvironmentVariable('VCPKG_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
