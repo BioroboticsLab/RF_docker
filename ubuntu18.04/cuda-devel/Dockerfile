@@ -4,10 +4,10 @@ FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-ubuntu18.04
 RUN apt-get update && \
     apt-get install -y libopencv-dev && \
     cd /opt && \
-    curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/1.5.1.rc0/apache-mxnet-src-1.5.1.rc0-incubating.tar.gz && \
-    tar -xf apache-mxnet-src-1.5.1.rc0-incubating.tar.gz --owner root --group root --no-same-owner && \
-    rm -f apache-mxnet-src-1.5.1.rc0-incubating.tar.gz && \
-    mv apache-mxnet-src-1.5.1.rc0-incubating mxnet-1.5.1 && \
+    curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/1.5.1/apache-mxnet-src-1.5.1-incubating.tar.gz && \
+    tar -xf apache-mxnet-src-1.5.1-incubating.tar.gz --owner root --group root --no-same-owner && \
+    rm -f apache-mxnet-src-1.5.1-incubating.tar.gz && \
+    mv apache-mxnet-src-1.5.1-incubating mxnet-1.5.1 && \
     cd mxnet-1.5.1 && \
     cmake -Bbuild -H. \
         -DCMAKE_CXX_STANDARD=14 -DUSE_CXX14_IF_AVAILABLE=ON \
