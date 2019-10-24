@@ -84,13 +84,13 @@ RUN python3.7 -m pip --no-cache-dir install \
         psutil
 
 RUN cd /tmp && \
-    curl -sSLO https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz && \
-    tar -xf cmake-3.14.5.tar.gz && \
-    cd cmake-3.14.5 && \
+    curl -sSLO https://cmake.org/files/v3.15/cmake-3.15.4.tar.gz && \
+    tar -xf cmake-3.15.4.tar.gz && \
+    cd cmake-3.15.4 && \
     ./configure --prefix=/usr/local && \
     make install -j$(nproc --all) && \
     cd .. && \
-    rm -rf cmake-3.14.5*
+    rm -rf cmake-3.15.4*
 
 COPY hdf5-1.10.2-no-trailing-attributes.patch /tmp
 RUN cd /tmp && \
