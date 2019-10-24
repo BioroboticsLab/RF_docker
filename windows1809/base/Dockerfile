@@ -6,7 +6,7 @@ COPY Profile.ps1 C:/Users/ContainerAdministrator/Documents/WindowsPowerShell/Mic
 RUN . $Profile; \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
-    Must-Run choco install -y dotnetfx --version 4.7.2.20180712 \
+    Must-Run choco install -y dotnetfx --version 4.7.2.20180712; \
     Must-Run choco install -y cmake --version 3.15.4 --installargs "ADD_CMAKE_TO_PATH=System"; \
     Must-Run choco install -y kitware-ninja --version 1.8.2.8127911; \
     Must-Run choco install -y \
