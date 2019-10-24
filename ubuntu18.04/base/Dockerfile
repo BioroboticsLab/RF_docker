@@ -127,4 +127,3 @@ ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /usr/local/share/ca-certificates/agk
 RUN update-ca-certificates
 
 RUN apt-get clean
-COPY profile.sh /etc/profile.d/robofish.sh
