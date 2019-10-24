@@ -2,22 +2,23 @@ FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-ltsc2019
 
 SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+COPY Profile.ps1 C:/Users/ContainerAdministrator/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
+RUN . $Profile; \
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
-    choco install -y cmake --version 3.15.4 --installargs "ADD_CMAKE_TO_PATH=System"; \
-    choco install -y kitware-ninja --version 1.8.2.8127911; \
-    choco install -y \
+    Must-Run choco install -y cmake --version 3.15.4 --installargs "ADD_CMAKE_TO_PATH=System"; \
+    Must-Run choco install -y kitware-ninja --version 1.8.2.8127911; \
+    Must-Run choco install -y \
         git \
         curl \
         7zip \
         wixtoolset; \
-    choco install -y python --version 3.7.3; \
+    Must-Run choco install -y python --version 3.7.3; \
     $env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
-    python -m pip --no-cache-dir install --no-warn-script-location wheel; \
-    choco install -y visualstudio2017buildtools; \
-    choco install -y visualstudio2017-workload-vctools; \
+    Must-Run python -m pip --no-cache-dir install --no-warn-script-location wheel; \
+    Must-Run choco install -y visualstudio2017buildtools; \
+    Must-Run choco install -y visualstudio2017-workload-vctools; \
     Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.16 --add Microsoft.VisualStudio.Component.VC.ATL'
-COPY Profile.ps1 C:/Users/ContainerAdministrator/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
 
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
