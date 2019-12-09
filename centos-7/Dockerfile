@@ -163,7 +163,6 @@ RUN version=3.4.8 && \
         -D BUILD_DOCS=OFF \
         -D BUILD_opencv_apps= \
         -D BUILD_WITH_DEBUG_INFO=OFF \
-        -D ENABLE_PRECOMPILED_HEADERS=ON \
         -D ENABLE_PROFILING=OFF \
         -D ENABLE_COVERAGE=OFF \
         -D OPENCV_ENABLE_NONFREE=OFF \
