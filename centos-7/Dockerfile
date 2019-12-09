@@ -4,13 +4,18 @@ FROM centos:7
 LABEL maintainer="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
 LABEL authors="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
 
+# GCC
+ENV BASH_ENV "/etc/profile"
 RUN yum install -y centos-release-scl && \
     yum install -y epel-release && \
+    yum install -y devtoolset-8 && \
+    yum clean all
+ADD gcc-8.sh /etc/profile.d/gcc-8.sh
+ADD ld-library-path.sh /etc/profile.d/ld-library-path.sh
+
+# CMake
+RUN version=3.15.5 && \
     yum install -y \
-        devtoolset-8 \
-        ninja-build \
-        bzip2 \
-        desktop-file-utils \
         curl-devel \
         expat-devel \
         zlib-devel \
@@ -20,12 +25,7 @@ RUN yum install -y centos-release-scl && \
         rhash-devel \
         libuv-devel \
         && \
-    ln -s /usr/bin/ninja-build /usr/local/bin/ninja && \
-    yum clean all
-ADD gcc-8.sh /etc/profile.d/gcc-8.sh
-ENV BASH_ENV "/etc/profile"
-
-RUN version=3.15.5 && \
+    yum clean all && \
     source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://cmake.org/files/v${version%.*}/cmake-${version}.tar.gz && \
@@ -36,12 +36,19 @@ RUN version=3.15.5 && \
     cd .. && \
     rm -rf cmake-${version}*
 
+# Ninja
+RUN yum install -y ninja-build && \
+    ln -s /usr/bin/ninja-build /usr/local/bin/ninja && \
+    yum clean all
+
+# Python 3.6
 RUN yum install -y \
         python36-devel \
         python36-numpy \
         && \
     yum clean all
 
+# CUDA
 RUN yum install -y dkms && \
     cd /tmp && \
     curl -sSLO https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-10.1.243-1.x86_64.rpm && \
@@ -50,14 +57,16 @@ RUN yum install -y dkms && \
     yum install -y cuda-10-1 && \
     yum clean all
 
-RUN yum install -y \
+# FFmpeg
+RUN version=4.2.1 && \
+    yum install -y \
         nasm \
         libass-devel \
         libtheora-devel \
         libvorbis-devel \
-        freetype-devel
-
-RUN version=4.2.1 && \
+        freetype-devel  \
+        && \
+    yum clean all && \
     source /etc/profile && \
     cd /tmp && \
     curl -sSLO http://ffmpeg.org/releases/ffmpeg-${version}.tar.gz && \
@@ -68,7 +77,12 @@ RUN version=4.2.1 && \
     cd .. && \
     rm -rf ffmpeg-${version}*
 
+# HDF
 RUN version=1.10.5 && \
+    yum install -y \
+        bzip2 \
+        && \
+    yum clean all && \
     source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${version%.*}/hdf5-${version}/src/hdf5-${version}.tar.bz2 && \
@@ -81,7 +95,32 @@ RUN version=1.10.5 && \
     cd .. && \
     rm -rf hdf5-${version}*
 
-RUN yum install -y \
+# Qt
+ENV Qt5_DIR /opt/qt5/5.12.6/gcc_64/lib/cmake/Qt5
+ADD qtifwsilent.qs /tmp/qtifwsilent.qs
+RUN version=5.12.6 && \
+    cd /tmp && \
+    curl -sSLO https://download.qt.io/official_releases/qt/${version%.*}/${version}/qt-opensource-linux-x64-${version}.run && \
+    chmod +x qt-opensource-linux-x64-${version}.run && \
+    env QT_INSTALL_DIR=/opt/qt5 ./qt-opensource-linux-x64-${version}.run --script qtifwsilent.qs -platform minimal && \
+    rm -f qt-opensource-linux-x64-${version}.run && \
+    rm -f qtifwsilent.qs
+
+# linuxdeployqt
+RUN version=6 && \
+    yum install -y \
+        desktop-file-utils \
+        && \
+    cd /opt && \
+    curl -sSLO https://github.com/probonopd/linuxdeployqt/releases/download/${version}/linuxdeployqt-${version}-x86_64.AppImage && \
+    chmod +x linuxdeployqt-${version}-x86_64.AppImage && \
+    ./linuxdeployqt-${version}-x86_64.AppImage --appimage-extract && \
+    mv squashfs-root linuxdeployqt-${version} && \
+    ln -s /opt/linuxdeployqt-${version}/AppRun /usr/local/bin/linuxdeployqt
+
+# OpenCV
+RUN version=3.4.8 && \
+    yum install -y \
         libpng-devel \
         jasper-devel \
         openexr-devel \
@@ -101,27 +140,8 @@ RUN yum install -y \
         gstreamer-plugins-base-devel \
         tesseract-devel \
         harfbuzz-devel \
-    && \
-    yum clean all
-
-ENV Qt5_DIR /opt/qt5/5.12.6/gcc_64/lib/cmake/Qt5
-ADD qtifwsilent.qs /tmp/qtifwsilent.qs
-RUN version=5.12.6 && \
-    cd /tmp && \
-    curl -sSLO https://download.qt.io/official_releases/qt/${version%.*}/${version}/qt-opensource-linux-x64-${version}.run && \
-    chmod +x qt-opensource-linux-x64-${version}.run && \
-    env QT_INSTALL_DIR=/opt/qt5 ./qt-opensource-linux-x64-${version}.run --script qtifwsilent.qs -platform minimal && \
-    rm -f qt-opensource-linux-x64-${version}.run && \
-    rm -f qtifwsilent.qs && \
-    version=6 && \
-    cd /opt && \
-    curl -sSLO https://github.com/probonopd/linuxdeployqt/releases/download/${version}/linuxdeployqt-${version}-x86_64.AppImage && \
-    chmod +x linuxdeployqt-${version}-x86_64.AppImage && \
-    ./linuxdeployqt-${version}-x86_64.AppImage --appimage-extract && \
-    mv squashfs-root linuxdeployqt-${version} && \
-    ln -s /opt/linuxdeployqt-${version}/AppRun /usr/local/bin/linuxdeployqt
-
-RUN version=3.4.8 && \
+        && \
+    yum clean all && \
     source /etc/profile && \
     cd /tmp && \
     curl -sSL -o opencv-${version}.zip https://github.com/opencv/opencv/archive/${version}.zip && \
@@ -171,6 +191,7 @@ RUN version=3.4.8 && \
         && \
     ninja -C build install
 
+# MXNet
 ENV MXNet_DIR /opt/mxnet-3.5.1
 RUN version=1.5.1 && \
     source /etc/profile && \
@@ -196,6 +217,7 @@ RUN version=1.5.1 && \
         && \
     ninja -C build
 
+# pybind11
 RUN version=2.3.0 && \
     source /etc/profile && \
     cd /tmp && \
@@ -210,6 +232,7 @@ RUN version=2.3.0 && \
     cd .. && \
     rm -rf pybind11-${version}*
 
+# rpclib
 RUN version=2.2.1 && \
     source /etc/profile && \
     cd /tmp && \
@@ -223,13 +246,13 @@ RUN version=2.2.1 && \
     cd .. && \
     rm -rf rpclib-${version}*
 
-RUN yum install -y \
+# Python 3.7
+RUN version=3.7.5 && \
+    yum install -y \
         openssl-devel \
         libffi-devel \
         && \
-    yum clean all
-
-RUN version=3.7.5 && \
+    yum clean all && \
     source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://www.python.org/ftp/python/${version}/Python-${version}.tgz && \
@@ -248,11 +271,11 @@ RUN version=3.7.5 && \
     rm -rf Pyhon-${version}* && \
     ldconfig
 
+# SSL access to custom pypiserver
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /etc/pki/ca-trust/source/anchors/agki-nas01.imp.fu-berlin.de-ca-cert.crt
 RUN update-ca-trust
 
-ADD ld-library-path.sh /etc/profile.d/ld-library-path.sh
-
+# Potential runtime dependencies for AppImages
 RUN yum install -y \
         libxkbcommon-x11 \
         && \
