@@ -155,7 +155,6 @@ RUN version=3.4.8 && \
         -D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3 \
         -D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-${version}/modules \
         -D ENABLE_CXX11=ON \
-        -D ENABLE_LTO=ON \
         -D BUILD_EXAMPLES=OFF \
         -D BUILD_PACKAGE=OFF \
         -D BUILD_TESTS=OFF \
