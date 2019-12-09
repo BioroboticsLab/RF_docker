@@ -169,8 +169,8 @@ RUN version=3.4.8 && \
         -D WITH_EIGEN=ON \
         -D WITH_FFMPEG=ON \
         -D WITH_IPP=ON \
-        -D WITH_JASPER=ON -D BUILD_JASPER=OFF\
-        -D WITH_JPEG=ON -D BUILD_JPEG=OFF\
+        -D WITH_JASPER=ON -D BUILD_JASPER=OFF \
+        -D WITH_JPEG=ON -D BUILD_JPEG=OFF \
         -D WITH_LAPACK=ON \
         -D WITH_MATLAB=OFF \
         -D WITH_OPENCLAMDBLAS=OFF \
