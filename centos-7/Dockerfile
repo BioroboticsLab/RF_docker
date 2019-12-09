@@ -123,7 +123,6 @@ RUN version=3.4.8 && \
     yum install -y \
         libpng-devel \
         jasper-devel \
-        openexr-devel \
         libwebp-devel \
         libjpeg-turbo-devel \
         freeglut-devel \
@@ -175,7 +174,7 @@ RUN version=3.4.8 && \
         -D WITH_LAPACK=ON \
         -D WITH_MATLAB=OFF \
         -D WITH_OPENCLAMDBLAS=OFF \
-        -D WITH_OPENEXR=ON -D BUILD_OPENEXR=OFF\
+        -D WITH_OPENEXR=OFF -D BUILD_OPENEXR=OFF \
         -D WITH_OPENGL=ON \
         -D WITH_PNG=ON -D BUILD_PNG=OFF \
         -D WITH_PROTOBUF=ON -D BUILD_PROTOBUF=OFF\
