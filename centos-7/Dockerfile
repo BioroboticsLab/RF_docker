@@ -244,3 +244,6 @@ RUN version=3.7.5 && \
 
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /etc/pki/ca-trust/source/anchors/agki-nas01.imp.fu-berlin.de-ca-cert.crt
 RUN update-ca-trust
+
+ADD ld-library-path.sh /etc/profile.d/ld-library-path.sh
+
