@@ -130,7 +130,6 @@ RUN version=3.4.8 && \
         mesa-libGL-devel \
         libtiff-devel \
         libdc1394-devel \
-        tbb-devel \
         eigen3-devel \
         boost-devel \
         boost-thread \
