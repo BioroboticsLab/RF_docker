@@ -26,6 +26,7 @@ ADD gcc-8.sh /etc/profile.d/gcc-8.sh
 ENV BASH_ENV "/etc/profile"
 
 RUN version=3.15.5 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://cmake.org/files/v${version%.*}/cmake-${version}.tar.gz && \
     tar -xf cmake-${version}.tar.gz && \
@@ -57,6 +58,7 @@ RUN yum install -y \
         freetype-devel
 
 RUN version=4.2.1 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSLO http://ffmpeg.org/releases/ffmpeg-${version}.tar.gz && \
     tar -xf ffmpeg-${version}.tar.gz && \
@@ -67,6 +69,7 @@ RUN version=4.2.1 && \
     rm -rf ffmpeg-${version}*
 
 RUN version=1.10.5 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${version%.*}/hdf5-${version}/src/hdf5-${version}.tar.bz2 && \
     tar -xf hdf5-${version}.tar.bz2 && \
@@ -119,6 +122,7 @@ RUN version=5.12.6 && \
     ln -s /opt/linuxdeployqt-${version}/AppRun /usr/local/bin/linuxdeployqt
 
 RUN version=3.4.8 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSL -o opencv-${version}.zip https://github.com/opencv/opencv/archive/${version}.zip && \
     unzip opencv-${version}.zip && \
@@ -163,6 +167,7 @@ RUN version=3.4.8 && \
 
 ENV MXNet_DIR /opt/mxnet-3.5.1
 RUN version=1.5.1 && \
+    source /etc/profile && \
     cd /opt && \
     curl -sSLO https://github.com/apache/incubator-mxnet/releases/download/${version}/apache-mxnet-src-${version}-incubating.tar.gz && \
     tar -xf apache-mxnet-src-${version}-incubating.tar.gz && \
@@ -186,6 +191,7 @@ RUN version=1.5.1 && \
     ninja -C build
 
 RUN version=2.3.0 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSL -o pybind11-${version}.tar.gz https://github.com/pybind/pybind11/archive/v${version}.tar.gz && \
     tar -xf pybind11-${version}.tar.gz && \
@@ -199,6 +205,7 @@ RUN version=2.3.0 && \
     rm -rf pybind11-${version}*
 
 RUN version=2.2.1 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSL -o rpclib-${version}.tar.gz https://github.com/rpclib/rpclib/archive/v2.2.1.tar.gz && \
     tar -xf rpclib-${version}.tar.gz && \
@@ -217,6 +224,7 @@ RUN yum install -y \
     yum clean all
 
 RUN version=3.7.5 && \
+    source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://www.python.org/ftp/python/${version}/Python-${version}.tgz && \
     tar -xf Python-${version}.tgz && \
