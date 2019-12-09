@@ -247,3 +247,7 @@ RUN update-ca-trust
 
 ADD ld-library-path.sh /etc/profile.d/ld-library-path.sh
 
+RUN yum install -y \
+        libxkbcommon-x11 \
+        && \
+    yum clean all
