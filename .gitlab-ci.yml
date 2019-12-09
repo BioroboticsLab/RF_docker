@@ -2,6 +2,21 @@ stages:
   - build
   - deploy
 
+build centos-7:
+    stage: build
+    tags: [ linux, shell ]
+    before_script:
+      - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
+    script:
+      - GPU_DRIVER_VERSION="$(dpkg-query --showformat='${Version}' --show 'nvidia-driver-*')"
+      - CACHE_FILE="/var/lib/gitlab-runner/.local/share/robofish-docker-gpu-driver-version"
+      - if [[ -f $CACHE_FILE ]] && [[ "$(cat $CACHE_FILE)" == "$GPU_DRIVER_VERSION" ]]; then OPTS=''; else OPTS='--no-cache'; fi
+      - echo -n $GPU_DRIVER_VERSION > $CACHE_FILE
+      - docker build $OPTS --pull -t "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:centos-7" -f centos-7/Dockerfile centos-7
+      - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH,,}:centos-7"
+    after_script:
+      - docker logout "${CI_REGISTRY}"
+
 build ubuntu-18.04:
   stage: build
   tags: [ linux, shell ]
