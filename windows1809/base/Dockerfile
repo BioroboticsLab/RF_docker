@@ -6,7 +6,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 RUN mkdir $PSHome/profile.d | out-null
 ADD powershell/Profile.ps1 /Windows/System32/WindowsPowerShell/v1.0/Profile.ps1
 
-ADD powershell/Must-Run.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/Must-Run.ps1
+ADD powershell/00-Must-Run.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/00-Must-Run.ps1
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
     Must-Run choco install -y dotnetfx --version 4.7.2.20180712; \
@@ -23,8 +23,8 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Must-Run choco install -y visualstudio2017buildtools; \
     Must-Run choco install -y visualstudio2017-workload-vctools; \
     Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.16 --add Microsoft.VisualStudio.Component.VC.ATL'
-ADD powershell/VSDevEnv.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/VSDevEnv.ps1
-ADD powershell/MSVC-15.9.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/MSVC-15.9.ps1
+ADD powershell/10-VSDevEnv.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/10-VSDevEnv.ps1
+ADD powershell/20-MSVC-15.9.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/20-MSVC-15.9.ps1
 
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
@@ -47,4 +47,4 @@ RUN $vcpkg_dir = 'C:/vcpkg'; \
     git checkout c05eb1ab83ddb9d4799fb9f3cd10bb385f05469b; \
     ./scripts/bootstrap.ps1; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
-ADD powershell/vcpkg-cmake.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/vcpkg-cmake.ps1
+ADD powershell/30-vcpkg-cmake.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/30-vcpkg-cmake.ps1
