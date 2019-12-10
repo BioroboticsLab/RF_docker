@@ -2,11 +2,12 @@
 
 FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-ltsc2019
 
-SHELL ["powershell", "-NoProfile", "-ExecutionPolicy Bypass", "-Command", "$ErrorActionPreference = 'Stop';"]
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
+RUN mkdir $PSHome/profile.d | out-null
+ADD powershell/Profile.ps1 /Windows/System32/WindowsPowerShell/v1.0/Profile.ps1
 
-COPY Profile.ps1 C:/Users/ContainerAdministrator/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
-RUN . $Profile; \
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+ADD powershell/Must-Run.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/Must-Run.ps1
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
     Must-Run choco install -y dotnetfx --version 4.7.2.20180712; \
     Must-Run choco install -y cmake --version 3.15.5 --installargs "ADD_CMAKE_TO_PATH=System"; \
@@ -22,6 +23,8 @@ RUN . $Profile; \
     Must-Run choco install -y visualstudio2017buildtools; \
     Must-Run choco install -y visualstudio2017-workload-vctools; \
     Start-Process "\"C:/Program Files (x86)/Microsoft Visual Studio/Installer/vs_installer.exe\"" -NoNewWindow -Wait -ArgumentList 'modify --installPath \"C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools\" --quiet --norestart --remove Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Tools.14.16 --add Microsoft.VisualStudio.Component.VC.ATL'
+ADD powershell/VSDevEnv.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/VSDevEnv.ps1
+ADD powershell/MSVC-15.9.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/MSVC-15.9.ps1
 
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \

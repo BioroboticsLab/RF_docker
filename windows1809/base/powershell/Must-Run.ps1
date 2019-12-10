@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 
 #
 # Sets exit to error when the command fails
