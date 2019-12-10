@@ -47,3 +47,4 @@ RUN $vcpkg_dir = 'C:/vcpkg'; \
     git checkout c05eb1ab83ddb9d4799fb9f3cd10bb385f05469b; \
     ./scripts/bootstrap.ps1; \
     [Environment]::SetEnvironmentVariable('VCPKG_DIR', "\"$vcpkg_dir\"", [EnvironmentVariableTarget]::Machine);
+ADD powershell/vcpkg-cmake.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/vcpkg-cmake.ps1
