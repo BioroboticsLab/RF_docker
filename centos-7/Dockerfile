@@ -163,6 +163,7 @@ RUN version=3.4.8 && \
         -D ENABLE_PROFILING=OFF \
         -D ENABLE_COVERAGE=OFF \
         -D OPENCV_ENABLE_NONFREE=OFF \
+        -D WITH_OPENCL=ON \
         -D WITH_IPP=OFF \
         -D WITH_CUDA=ON \
         -D WITH_CUBLAS=ON \
