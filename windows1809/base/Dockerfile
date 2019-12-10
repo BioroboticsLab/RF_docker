@@ -28,12 +28,12 @@ ADD powershell/20-MSVC-15.9.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile
 
 COPY qtifwsilent.qs C:/qtifwsilent.qs
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-    (New-Object Net.WebClient).DownloadFile('https://download.qt.io/official_releases/qt/5.12/5.12.4/qt-opensource-windows-x86-5.12.4.exe', 'C:/qt.exe'); \
+    (New-Object Net.WebClient).DownloadFile('https://download.qt.io/official_releases/qt/5.12/5.12.6/qt-opensource-windows-x86-5.12.6.exe', 'C:/qt.exe'); \
     $env:QT_INSTALL_DIR = 'C:/Qt'; \
     Start-Process C:/qt.exe -NoNewWindow -Wait -ArgumentList '--verbose --script C:/qtifwsilent.qs'; \
     Remove-Item -Force C:/qtifwsilent.qs; \
     Remove-Item -Force C:/qt.exe; \
-    [Environment]::SetEnvironmentVariable('Qt5_DIR', 'C:/Qt/5.12.4/msvc2017_64', [EnvironmentVariableTarget]::Machine)
+    [Environment]::SetEnvironmentVariable('Qt5_DIR', 'C:/Qt/5.12.6/msvc2017_64', [EnvironmentVariableTarget]::Machine)
 
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
     (New-Object Net.WebClient).DownloadFile('https://www.baslerweb.com/fp-1551786641/media/downloads/software/pylon_software/Basler_pylon_5.2.0.13457.exe', 'C:/Basler_pylon_5.2.0.13457.exe'); \
