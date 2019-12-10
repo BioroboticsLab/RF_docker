@@ -14,8 +14,7 @@ COPY opengl32.dll C:/Windows/System32/opengl32.dll
 COPY glu32.dll C:/Windows/System32/glu32.dll
 COPY ddraw.dll C:/Windows/System32/ddraw.dll
 COPY nvcuda.dll C:/Windows/System32/nvcuda.dll
-RUN . $Profile; \
-    cd $env:VCPKG_DIR; \
+RUN cd $env:VCPKG_DIR; \
     $vcpkg_triplet = 'x64-windows-14.16'; \
     Must-Run ./vcpkg install --triplet "$vcpkg_triplet"  \
         libepoxy \
