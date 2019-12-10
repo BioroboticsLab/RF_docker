@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-ltsc2019
 

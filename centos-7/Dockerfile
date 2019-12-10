@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: AGPL-3.0-or-later
 FROM centos:7
 
 LABEL maintainer="Moritz Maxeiner <moritz.maxeiner@fu-berlin.de>"
@@ -10,8 +10,8 @@ RUN yum install -y centos-release-scl && \
     yum install -y epel-release && \
     yum install -y devtoolset-8 && \
     yum clean all
-ADD gcc-8.sh /etc/profile.d/gcc-8.sh
-ADD ld-library-path.sh /etc/profile.d/ld-library-path.sh
+ADD bash/gcc-8.sh /etc/profile.d/gcc-8.sh
+ADD bash/ld-library-path.sh /etc/profile.d/ld-library-path.sh
 
 # CMake
 RUN version=3.15.5 && \

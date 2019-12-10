@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 FROM git.imp.fu-berlin.de:5000/bioroboticslab/robofish/docker:base-windows1809
 
 COPY opengl32.dll C:/Windows/System32/opengl32.dll
