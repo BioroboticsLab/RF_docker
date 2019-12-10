@@ -14,7 +14,7 @@ RUN . $Profile; \
         curl \
         7zip \
         wixtoolset; \
-    Must-Run choco install -y python --version 3.7.3; \
+    Must-Run choco install -y python --version 3.7.5; \
     $env:PATH = "\"$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User));$([Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine))\""; \
     Must-Run python -m pip --no-cache-dir install --no-warn-script-location wheel; \
     Must-Run choco install -y visualstudio2017buildtools; \
