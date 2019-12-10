@@ -205,6 +205,9 @@ RUN version=1.5.1 && \
         -D CMAKE_CXX_STANDARD=14 -D USE_CXX14_IF_AVAILABLE=ON \
         -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local \
         -D USE_CUDA=ON -D USE_CUDNN=ON -D USE_NCCL=OFF \
+        -D CUDA_ARCH_NAME=Manual \
+        -D CUDA_ARCH_BIN="61" \
+        -D CUDA_ARCH_PTX="30 52 75" \
         -D USE_OPENCV=ON -D USE_OPENMP=ON \
         -D USE_LAPACK=ON -D USE_MKL_IF_AVAILABLE=OFF \
         -D USE_PROFILER=ON \
