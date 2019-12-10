@@ -163,12 +163,12 @@ RUN version=3.4.8 && \
         -D ENABLE_PROFILING=OFF \
         -D ENABLE_COVERAGE=OFF \
         -D OPENCV_ENABLE_NONFREE=OFF \
+        -D WITH_IPP=OFF \
         -D WITH_CUDA=ON \
         -D WITH_CUBLAS=ON \
         -D BUILD_opencv_cudacodec=OFF \
         -D WITH_EIGEN=ON \
         -D WITH_FFMPEG=ON \
-        -D WITH_IPP=ON \
         -D WITH_JASPER=ON -D BUILD_JASPER=OFF \
         -D WITH_JPEG=ON -D BUILD_JPEG=OFF \
         -D WITH_LAPACK=ON \
