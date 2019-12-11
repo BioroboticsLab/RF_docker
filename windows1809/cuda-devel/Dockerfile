@@ -43,4 +43,4 @@ RUN cd $env:VCPKG_DIR; \
     Remove-Item -Force -Recurse ./downloads; \
     Remove-Item -Force -Recurse ./buildtrees; \
     Remove-Item -Force -Recurse ./packages;
-ADD powershell/30-vcpkg-cmake.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/30-vcpkg-cmake.ps1
+ADD powershell/30-Vcpkg-CMake.ps1 /Windows/System32/WindowsPowerShell/v1.0/profile.d/30-Vcpkg-CMake.ps1

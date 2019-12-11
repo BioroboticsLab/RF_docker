@@ -11,5 +11,5 @@ function Vcpkg-CMake {
 	}
 }
 
-# Use vcpkg-cmake by default
+# Use Vcpkg-CMake by default
 Set-Alias -Name cmake -Value Vcpkg-CMake
