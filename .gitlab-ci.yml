@@ -41,10 +41,13 @@ build windows-1809:
   tags: [ windows-1809, shell ]
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" "${CI_REGISTRY}" --password-stdin
-    - Copy-Item 'C:/Windows/System32/opengl32.dll' 'windows1809/opengl32.dll'
-    - Copy-Item 'C:/Windows/System32/glu32.dll' 'windows1809/glu32.dll'
-    - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows1809/ddraw.dll'
-    - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows1809/nvcuda.dll'
+    - Copy-Item 'C:/Windows/System32/opengl32.dll' 'windows1809/devel/opengl32.dll'
+    - Copy-Item 'C:/Windows/System32/glu32.dll' 'windows1809/devel/glu32.dll'
+    - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows1809/devel/ddraw.dll'
+    - Copy-Item 'C:/Windows/System32/opengl32.dll' 'windows1809/cuda-devel/opengl32.dll'
+    - Copy-Item 'C:/Windows/System32/glu32.dll' 'windows1809/cuda-devel/glu32.dll'
+    - Copy-Item 'C:/Windows/System32/ddraw.dll' 'windows1809/cuda-devel/ddraw.dll'
+    - Copy-Item 'C:/Windows/System32/nvcuda.dll' 'windows1809/cuda-devel/nvcuda.dll'
   script:
     - docker build --isolation process --memory 2G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809" windows1809/base
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809"
