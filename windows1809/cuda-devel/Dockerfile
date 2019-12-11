@@ -37,6 +37,7 @@ RUN cd $env:VCPKG_DIR; \
         "\"opencv3[cuda,ffmpeg,ximea,opengl,contrib,ipp,dnn]\"" \
         "\"mxnet[cpp,opencv,cuda,cudnn]\""; \
     [Environment]::SetEnvironmentVariable('VCPKG_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
+    [Environment]::SetEnvironmentVariable('VCPKG_TARGET_TRIPLET', "\"$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     [Environment]::SetEnvironmentVariable('VCPKG_INSTALL_DIR', "\"$env:VCPKG_DIR/installed/$vcpkg_triplet\"", [EnvironmentVariableTarget]::Machine); \
     Remove-Item -Force -Recurse ./downloads; \
     Remove-Item -Force -Recurse ./buildtrees; \
