@@ -272,7 +272,7 @@ RUN version=3.7.5 && \
         && \
     make -j$(nproc) altinstall && \
     cd .. && \
-    rm -rf Pyhon-${version}* && \
+    rm -rf Python-${version}* && \
     ldconfig
 
 # SSL access to custom pypiserver
