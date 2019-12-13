@@ -115,6 +115,7 @@ RUN version=6 && \
     curl -sSLO https://github.com/probonopd/linuxdeployqt/releases/download/${version}/linuxdeployqt-${version}-x86_64.AppImage && \
     chmod +x linuxdeployqt-${version}-x86_64.AppImage && \
     ./linuxdeployqt-${version}-x86_64.AppImage --appimage-extract && \
+    rm -f linuxdeployqt-${version}-x86_64.AppImage && \
     mv squashfs-root linuxdeployqt-${version} && \
     ln -s /opt/linuxdeployqt-${version}/AppRun /usr/local/bin/linuxdeployqt
 
