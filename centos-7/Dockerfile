@@ -275,6 +275,17 @@ RUN version=3.7.5 && \
     rm -rf Python-${version}* && \
     ldconfig
 
+# pylon (Basler cameras)
+RUN version=5.2.0.13457 && \
+    cd /tmp && \
+    curl -sSLO https://www.baslerweb.com/fp-1551786516/media/downloads/software/pylon_software/pylon-${version}-x86_64.tar.gz && \
+    tar -xf pylon-${version}-x86_64.tar.gz && \
+    cd pylon-${version}-x86_64 && \
+    tar -xf pylonSDK-${version}-x86_64.tar.gz && \
+    mv pylon5 /opt/pylon5 && \
+    cd .. && \
+    rm -rf pylon-${version}*
+
 # SSL access to custom pypiserver
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /etc/pki/ca-trust/source/anchors/agki-nas01.imp.fu-berlin.de-ca-cert.crt
 RUN update-ca-trust
