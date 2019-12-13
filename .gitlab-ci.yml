@@ -51,9 +51,9 @@ build windows-1809:
   script:
     - docker build --isolation process --memory 2G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809" windows1809/base
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):base-windows1809"
-    - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809" -f windows1809/devel/Dockerfile windows1809/cuda-devel
+    - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809" -f windows1809/devel/Dockerfile windows1809/devel
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):devel-windows1809"
-    - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows1809" -f windows1809/cuda-devel/Dockerfile windows1809/devel
+    - docker build --isolation process --memory 15G -t "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows1809" -f windows1809/cuda-devel/Dockerfile windows1809/cuda-devel
     - docker push "${CI_REGISTRY}/$(${CI_PROJECT_PATH}.toLower()):cuda-devel-windows1809"
   after_script:
     - docker logout "${CI_REGISTRY}"
