@@ -286,6 +286,7 @@ RUN version=5.2.0.13457 && \
     mv pylon5 /opt/pylon5 && \
     cd .. && \
     rm -rf pylon-${version}*
+ADD bash/pylon.sh /etc/profile.d/pylon.sh
 
 # SSL access to custom pypiserver
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /etc/pki/ca-trust/source/anchors/agki-nas01.imp.fu-berlin.de-ca-cert.crt
