@@ -190,7 +190,9 @@ RUN version=3.4.8 && \
         -D WITH_ZLIB=ON -D BUILD_ZLIB=OFF \
         -D WITH_V4L=ON \
         && \
-    ninja -C build install
+    ninja -C build install && \
+    cd .. && \
+    rm -rf opencv-${version}* opencv_contrib-${version}*
 
 # MXNet
 ENV MXNet_DIR /opt/mxnet-1.5.1
