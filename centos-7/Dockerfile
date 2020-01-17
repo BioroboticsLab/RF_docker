@@ -339,7 +339,11 @@ RUN yum install -y \
         git \
         libepoxy-devel \
         && \
-    yum clean all
+    yum clean all && \
+    python3.6 -m pip --no-cache-dir install \
+        wheel && \
+    python3.7 -m pip --no-cache-dir install \
+        wheel
 
 ADD ldconfig/local.conf /etc/ld.so.conf.d/local.conf
 RUN ldconfig
