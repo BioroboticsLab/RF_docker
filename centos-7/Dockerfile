@@ -341,9 +341,12 @@ RUN yum install -y \
         && \
     yum clean all && \
     python3.6 -m pip --no-cache-dir install \
-        wheel && \
+        wheel \
+        twine \
+        && \
     python3.7 -m pip --no-cache-dir install \
-        wheel
+        wheel \
+        twine
 
 ADD ldconfig/local.conf /etc/ld.so.conf.d/local.conf
 RUN ldconfig
