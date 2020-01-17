@@ -267,7 +267,7 @@ RUN version=3.7.5 && \
         --prefix=/usr \
         --enable-optimizations \
         --enable-shared \
-        --without-ensurepip \
+        --with-ensurepip=install \
         --with-system-expat \
         --with-system-ffi \
         && \
