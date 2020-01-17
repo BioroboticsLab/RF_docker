@@ -336,6 +336,7 @@ RUN yum install -y \
 
 # Additional development dependencies
 RUN yum install -y \
+        git \
         libepoxy-devel \
         && \
     yum clean all
