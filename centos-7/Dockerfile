@@ -309,6 +309,19 @@ RUN version=4.14.2 && \
     cd .. && \
     rm -rf CGAL-${version}*
 
+# glm
+RUN version=0.9.9.5 && \
+    cd /tmp && \
+    curl -sSLO https://github.com/g-truc/glm/releases/download/${version}/glm-${version}.zip && \
+    unzip glm-${version}.zip && \
+    cd glm && \
+    cmake -S. -B build -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local \
+        && \
+    ninja -C build install && \
+    cd .. && \
+    rm -rf glm*
+
 # SSL access to custom pypiserver
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /etc/pki/ca-trust/source/anchors/agki-nas01.imp.fu-berlin.de-ca-cert.crt
 RUN update-ca-trust
@@ -322,6 +335,6 @@ RUN yum install -y \
 # Additional development dependencies
 RUN yum install -y \
         libepoxy-devel \
-        glm-devel \
         && \
     yum clean all
+
