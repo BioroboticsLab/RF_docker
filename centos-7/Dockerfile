@@ -341,3 +341,5 @@ RUN yum install -y \
         && \
     yum clean all
 
+ADD ldconfig/local.conf /etc/ld.so.conf.d/local.conf
+RUN ldconfig
