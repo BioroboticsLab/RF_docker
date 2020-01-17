@@ -318,3 +318,9 @@ RUN yum install -y \
         libxkbcommon-x11 \
         && \
     yum clean all
+
+# Additional development dependencies
+RUN yum install -y \
+        libepoxy-devel \
+        && \
+    yum clean all
