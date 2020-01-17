@@ -322,5 +322,6 @@ RUN yum install -y \
 # Additional development dependencies
 RUN yum install -y \
         libepoxy-devel \
+        glm-devel \
         && \
     yum clean all
