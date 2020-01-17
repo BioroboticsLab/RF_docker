@@ -193,7 +193,7 @@ RUN version=3.4.8 && \
     ninja -C build install
 
 # MXNet
-ENV MXNet_DIR /opt/mxnet-3.5.1
+ENV MXNet_DIR /opt/mxnet-1.5.1
 RUN version=1.5.1 && \
     source /etc/profile && \
     cd /opt && \
