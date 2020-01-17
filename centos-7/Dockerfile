@@ -292,7 +292,7 @@ ADD bash/pylon.sh /etc/profile.d/pylon.sh
 RUN version=4.14.2 && \
     yum install -y \
         gmp-devel \
-        mpfs-devel \
+        mpfr-devel \
         && \
     yum clean all && \
     source /etc/profile && \
