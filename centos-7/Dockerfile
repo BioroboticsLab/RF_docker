@@ -298,8 +298,8 @@ RUN version=4.14.2 && \
     source /etc/profile && \
     cd /tmp && \
     curl -sSLO https://github.com/CGAL/cgal/releases/download/releases/CGAL-${version}/CGAL-${version}.tar.xz && \
-    tar -xf CGAL-${version}-x86_64.tar.xz && \
-    cd CGAL-${version}-x86_64 && \
+    tar -xf CGAL-${version}.tar.xz && \
+    cd CGAL-${version} && \
     cmake -S. -B build -G Ninja \
         -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local \
         -DCGAL_HEADER_ONLY=ON \
