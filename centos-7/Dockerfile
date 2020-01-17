@@ -288,6 +288,27 @@ RUN version=5.2.0.13457 && \
     rm -rf pylon-${version}*
 ADD bash/pylon.sh /etc/profile.d/pylon.sh
 
+# CGAL
+RUN version=4.14.2 && \
+    yum install -y \
+        gmp-devel \
+        mpfs-devel \
+        && \
+    yum clean all && \
+    source /etc/profile && \
+    cd /tmp && \
+    curl -sSLO https://github.com/CGAL/cgal/releases/download/releases/CGAL-${version}/CGAL-${version}.tar.xz && \
+    tar -xf CGAL-${version}-x86_64.tar.xz && \
+    cd CGAL-${version}-x86_64 && \
+    cmake -S. -B build -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local \
+        -DCGAL_HEADER_ONLY=ON \
+        -DWITH_CGAL_Qt5=ON \
+        && \
+    ninja -C build install && \
+    cd .. && \
+    rm -rf CGAL-${version}*
+
 # SSL access to custom pypiserver
 ADD agki-nas01.imp.fu-berlin.de-ca-cert.crt /etc/pki/ca-trust/source/anchors/agki-nas01.imp.fu-berlin.de-ca-cert.crt
 RUN update-ca-trust
