@@ -349,4 +349,5 @@ RUN yum install -y \
         twine
 
 ADD ldconfig/local.conf /etc/ld.so.conf.d/local.conf
+ADD ldconfig/qt5.conf /etc/ld.so.conf.d/qt5.conf
 RUN ldconfig
