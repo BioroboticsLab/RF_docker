@@ -9,8 +9,9 @@ ENV BASH_ENV "/etc/profile"
 RUN yum install -y centos-release-scl && \
     yum install -y epel-release && \
     yum install -y devtoolset-8 && \
+    yum install -y rh-git218-git && \
     yum clean all
-ADD bash/gcc-8.sh /etc/profile.d/gcc-8.sh
+ADD bash/toolchain.sh /etc/profile.d/toolchain.sh
 ADD bash/ld-library-path.sh /etc/profile.d/ld-library-path.sh
 
 # CMake
@@ -336,7 +337,6 @@ RUN yum install -y \
 
 # Additional development dependencies
 RUN yum install -y \
-        git \
         libepoxy-devel \
         && \
     yum clean all && \
